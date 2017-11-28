@@ -17,6 +17,7 @@ var types=[
 #-Steel ball: projétil com hitbox e splash damage
 
 func _ready():
+	self.add_to_group("Weapon")
 	#TODO:Add some rotation when the weapon is landing
 	randomize()
 	var index=randi()%types.size()

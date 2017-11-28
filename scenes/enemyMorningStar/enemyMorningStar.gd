@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-var life=3
+var life=2
 var state="Entering"
 var knockback=0
 var vectorKnockback=Vector2()
