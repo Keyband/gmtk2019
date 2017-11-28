@@ -1,18 +1,37 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/weapon/weapon.gd" type="Script" id=1]
 [ext_resource path="res://resources/Sprites/Weapons_Icons_16x16.png" type="Texture" id=2]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="Animation" id=1]
+resource_name = "animSize"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("sprite:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 2 ),
+"transitions": PoolRealArray( -2, -2, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.25, 1.25 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 8, 8 )
 
 [node name="weapon" type="Area2D"]
 script = ExtResource( 1 )
 
+[node name="animationPlayer" type="AnimationPlayer" parent="."]
+anims/animSize = SubResource( 1 )
+
 [node name="twnEnter" type="Tween" parent="."]
 
 [node name="collisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="spriteShadow" type="Sprite" parent="."]
 modulate = Color( 0, 0, 0, 1 )
@@ -25,3 +44,4 @@ texture = ExtResource( 2 )
 vframes = 3
 hframes = 10
 [connection signal="body_entered" from="." to="." method="_on_weaponLance_body_entered"]
+[connection signal="tween_completed" from="twnEnter" to="." method="_on_twnEnter_tween_completed"]

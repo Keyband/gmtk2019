@@ -49,3 +49,8 @@ func _on_weaponLance_body_entered(body):
 		if body.currentWeapon=="Nothing":
 			body.changeWeapon(self.type)
 			self.queue_free()
+
+
+func _on_twnEnter_tween_completed(object, key):
+	$animationPlayer.play("animSize")
+	$spriteShadow.visible=false
