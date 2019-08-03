@@ -9,7 +9,7 @@ var types=[
 
 func _ready():
 	randomize()
-	self.type=types[1]#randi()%types.size()]
+	self.type=types[randi()%types.size()]
 	$label.text=self.type
 
 func _on_weaponLance_body_entered(body):

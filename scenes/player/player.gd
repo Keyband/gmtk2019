@@ -10,6 +10,8 @@ const speed=300
 
 var lance=preload("res://scenes/attacks/lanceAttack.tscn")
 var axe=preload("res://scenes/attacks/axeAttack.tscn")
+var sword=preload("res://scenes/attacks/swordAttack.tscn")
+
 func _ready():
 	self.add_to_group("Player")
 	set_physics_process(true)
@@ -31,6 +33,10 @@ func _physics_process(delta):
 				add_child(i)
 			elif self.currentWeapon=="Axe":
 				var i=axe.instance()
+				i.position=Vector2()
+				add_child(i)
+			elif self.currentWeapon=="Sword":
+				var i=sword.instance()
 				i.position=Vector2()
 				add_child(i)
 			self.changeWeapon("Nothing")
