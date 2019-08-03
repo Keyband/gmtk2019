@@ -4,7 +4,8 @@ export (String,"Lance","Axe","Sword") var type="Lance"
 var types=[
 	"Lance",
 	"Axe",
-	"Sword"
+	"Sword",
+	"Katana"
 ]
 
 func _ready():
