@@ -1,23 +1,28 @@
 extends KinematicBody2D
 
-var life=3
+var life=1
 var state="Alive"
 var knockback=0
 var vectorKnockback=Vector2()
-const speed=85
+const speed=125
 var particle=preload("res://scenes/genericParticle/particle.tscn")
-var rotationSpeed=0
+var dagger=preload("res://scenes/enemyRanged/enemyDaggerAttack.tscn")
+var canAttack=true
 func _ready():
 	self.add_to_group("Enemy")
 	set_physics_process(true)
 
 func _physics_process(delta):
-	$area2D.rotation+=delta*rotationSpeed
 	if state=="Alive":
-		rotationSpeed=lerp(rotationSpeed,1.5*PI,0.15)
-		move_and_slide((global.player.global_position-self.global_position).normalized()*speed)
+		var vectorDistanceToPlayer=global.player.global_position-self.global_position
+		if vectorDistanceToPlayer.length()>300:
+			move_and_slide(vectorDistanceToPlayer.normalized()*speed)
+		elif vectorDistanceToPlayer.length()<250:
+			move_and_slide(-vectorDistanceToPlayer.normalized()*speed)
+		else:
+			attack()
+			
 	elif state=="Dead":
-		rotationSpeed=lerp(rotationSpeed,0,0.1)
 		knockback=lerp(knockback,0,0.1)
 		move_and_slide(knockback*vectorKnockback)
 
@@ -48,3 +53,18 @@ func _on_tmrDespawn_timeout():
 
 func _on_twnDespawn_tween_completed(object, key):
 	self.queue_free()
+
+func attack():
+	var vectorDistanceToPlayer=global.player.global_position-self.global_position
+	if canAttack:
+		if vectorDistanceToPlayer.length()<300 and vectorDistanceToPlayer.length()>250:
+			var i=dagger.instance()
+			i.global_position=self.global_position
+			i.vectorDirection=vectorDistanceToPlayer.normalized()
+			get_parent().add_child(i)
+			self.canAttack=false
+			$tmrAttack.start()
+		
+
+func _on_tmrAttack_timeout():
+	canAttack=true

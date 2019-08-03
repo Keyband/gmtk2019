@@ -1,5 +1,6 @@
 extends KinematicBody2D
 
+var life=1
 var currentWeapon="Nothing"
 
 var vectorVelocity=Vector2()
@@ -22,6 +23,7 @@ func _ready():
 	self.add_to_group("Player")
 	set_physics_process(true)
 func _physics_process(delta):
+	if life<=0:print("u ded")
 	var vectorInput=Vector2()
 	vectorInput.x=1 if Input.is_action_pressed('ui_right') else -1 if Input.is_action_pressed("ui_left") else 0
 	vectorInput.y=1 if Input.is_action_pressed('ui_down') else -1 if Input.is_action_pressed("ui_up") else 0
@@ -88,4 +90,5 @@ func changeWeapon(weapon):
 	elif self.currentWeapon=="Dagger":weaponWeight=1
 	elif self.currentWeapon=="MorningStar":weaponWeight=5
 	
-	
+func takeDamage(amount):
+	self.life-=amount
