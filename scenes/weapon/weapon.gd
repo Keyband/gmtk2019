@@ -6,8 +6,16 @@ var types=[
 	"Axe",
 	"Sword",
 	"Katana",
-	"Dagger"
+	"Dagger",
+	"MorningStar"
 ]
+
+#-Chakram: projétil, quica nas paredes, pode matar o próprio player (ou não, a decidir)
+#-Morning star: dá uma volta ao redor do player
+#-Besta: projétil, perfurante, range grande
+#-Javelin: projétil, perfurante, range menor mas hitbox maior
+#-Porrete: tipo um machado, mas tem knockback elevado
+#-Steel ball: projétil com hitbox e splash damage
 
 func _ready():
 	randomize()

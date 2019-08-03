@@ -50,7 +50,6 @@ func _physics_process(delta):
 				i.global_position=self.global_position
 				i.vectorDirection=(get_global_mouse_position()-self.global_position).normalized()
 				get_parent().add_child(i)
-				speedMultiplier=2
 			self.changeWeapon("Nothing")
 	
 	vectorVelocity=movement*speed*speedMultiplier #Lerp stuff should be added around here
