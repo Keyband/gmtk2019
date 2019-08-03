@@ -14,6 +14,7 @@ var lance=preload("res://scenes/attacks/lanceAttack.tscn")
 var axe=preload("res://scenes/attacks/axeAttack.tscn")
 var sword=preload("res://scenes/attacks/swordAttack.tscn")
 var katana=preload("res://scenes/attacks/katanaAttack.tscn")
+var dagger=preload("res://scenes/attacks/daggerAttack.tscn")
 func _ready():
 	self.add_to_group("Player")
 	set_physics_process(true)
@@ -43,6 +44,12 @@ func _physics_process(delta):
 				var i=katana.instance()
 				i.position=Vector2()
 				add_child(i)
+				speedMultiplier=2
+			elif self.currentWeapon=="Dagger":
+				var i=dagger.instance()
+				i.global_position=self.global_position
+				i.vectorDirection=(get_global_mouse_position()-self.global_position).normalized()
+				get_parent().add_child(i)
 				speedMultiplier=2
 			self.changeWeapon("Nothing")
 	

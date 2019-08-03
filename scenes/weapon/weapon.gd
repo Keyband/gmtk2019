@@ -5,7 +5,8 @@ var types=[
 	"Lance",
 	"Axe",
 	"Sword",
-	"Katana"
+	"Katana",
+	"Dagger"
 ]
 
 func _ready():
