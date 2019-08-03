@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/camera/camera2D.gd" type="Script" id=1]
 [ext_resource path="res://resources/tilemaps/main.tres" type="TileSet" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=6]
 [ext_resource path="res://icon.png" type="Texture" id=7]
 [ext_resource path="res://scenes/attacks/morningStarAttack.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/genericParticle/particle.tscn" type="PackedScene" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32.6961, 32.6176 )
@@ -27,8 +28,8 @@ script = ExtResource( 1 )
 
 [node name="tileMap" type="TileMap" parent="Node2D"]
 tile_set = ExtResource( 2 )
-collision_layer = 3
-collision_mask = 3
+collision_layer = 7
+collision_mask = 7
 format = 1
 tile_data = PoolIntArray( 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 0, 0, 8, 0, 0, 9, 0, 0, 10, 0, 0, 11, 0, 0, 12, 0, 0, 13, 0, 0, 14, 0, 0, 15, 0, 0, 65536, 0, 0, 65551, 0, 0, 131072, 0, 0, 131087, 0, 0, 196608, 0, 0, 196623, 0, 0, 262144, 0, 0, 262159, 0, 0, 327680, 0, 0, 327695, 0, 0, 393216, 0, 0, 393231, 0, 0, 458752, 0, 0, 458767, 0, 0, 524288, 0, 0, 524289, 0, 0, 524290, 0, 0, 524291, 0, 0, 524292, 0, 0, 524293, 0, 0, 524294, 0, 0, 524295, 0, 0, 524296, 0, 0, 524297, 0, 0, 524298, 0, 0, 524299, 0, 0, 524300, 0, 0, 524301, 0, 0, 524302, 0, 0, 524303, 0, 0 )
 
@@ -76,6 +77,8 @@ text = "Nothing"
 
 [node name="morningStarAttack" parent="Node2D/player" instance=ExtResource( 8 )]
 position = Vector2( -0.304016, 0.381989 )
+
+[node name="particle" parent="." instance=ExtResource( 9 )]
 [connection signal="tween_completed" from="camera2D/twnShake" to="camera2D" method="_on_twnShake_tween_completed"]
 [connection signal="timeout" from="Node2D/weaponSpawner/timer" to="Node2D/weaponSpawner" method="_on_timer_timeout"]
 [connection signal="timeout" from="Node2D/enemySpawner/timer" to="Node2D/enemySpawner" method="_on_timer_timeout"]

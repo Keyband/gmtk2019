@@ -5,6 +5,7 @@ var state="Alive"
 var knockback=0
 var vectorKnockback=Vector2()
 const speed=125
+var particle=preload("res://scenes/genericParticle/particle.tscn")
 
 func _ready():
 	self.add_to_group("Enemy")
@@ -32,6 +33,11 @@ func takeDamage(amount):
 		$twnGray.interpolate_property(self,"modulate",self.modulate,Color("808080"),0.4,Tween.TRANS_CUBIC,Tween.EASE_OUT)
 		$twnGray.start()
 		$tmrDespawn.start()
+		for j in range(randi()%20):
+			var i=particle.instance()
+			i.global_position=self.global_position+Vector2(rand_range(-5,5),rand_range(-5,5))
+			i.linear_velocity=rand_range(1.8,2.4)*knockback*vectorKnockback.rotated(rand_range(-1,1)*PI/8).normalized()
+			get_parent().add_child(i)
 		#Add score increment here
 
 func _on_tmrDespawn_timeout():
