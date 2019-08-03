@@ -25,7 +25,8 @@ func _physics_process(delta):
 		if self.currentWeapon!="Nothing":
 			if self.currentWeapon=="Lance":
 				pass
-			self.currentWeapon="Nothing"
+			self.changeWeapon("Nothing")
+			
 	$sprite2.position=aimDistance*(get_global_mouse_position()-self.global_position).normalized()
 func changeWeapon(weapon):
 	self.currentWeapon=weapon
