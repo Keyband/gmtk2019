@@ -4,12 +4,14 @@ var life=1
 var currentWeapon="Nothing"
 
 var vectorVelocity=Vector2()
-var aimDistance=100
+var aimDistance=18
 
 var speedMultiplier=1
 var weaponWeight=1
 const minimumAimDistance=100
-const speed=400
+const speed=225
+
+var anim="idle"
 
 var lance=preload("res://scenes/attacks/lanceAttack.tscn")
 var axe=preload("res://scenes/attacks/axeAttack.tscn")
@@ -24,6 +26,9 @@ func _ready():
 	set_physics_process(true)
 func _physics_process(delta):
 	if life<=0:print("u ded")
+	
+	if $animationPlayer.name!=anim:$animationPlayer.play(anim)
+	
 	var vectorInput=Vector2()
 	vectorInput.x=1 if Input.is_action_pressed('ui_right') else -1 if Input.is_action_pressed("ui_left") else 0
 	vectorInput.y=1 if Input.is_action_pressed('ui_down') else -1 if Input.is_action_pressed("ui_up") else 0
@@ -70,6 +75,9 @@ func _physics_process(delta):
 	
 	if Input.is_action_just_pressed("ui_rmb"):
 		global.minorShake()
+	
+	$sprite.flip_h=true if vectorInput.x<0 else false if vectorInput.x>0 else $sprite.flip_h
+	anim="idle" if vectorInput==Vector2() else "walk"
 	
 	var A=0.66
 	var weaponWeightMultiplier=(1/4.0)*(5 - A - weaponWeight*(1 - A))

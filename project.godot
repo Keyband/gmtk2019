@@ -25,7 +25,8 @@ global="*res://scenes/global.gd"
 
 [display]
 
-window/size/height=576
+window/size/width=512
+window/size/height=288
 
 [input]
 
