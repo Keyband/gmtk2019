@@ -8,6 +8,8 @@ var aimDistance=100
 const minimumAimDistance=100
 const speed=300
 
+var lance=preload("res://scenes/attacks/lanceAttack.tscn")
+var axe=preload("res://scenes/attacks/axeAttack.tscn")
 func _ready():
 	self.add_to_group("Player")
 	set_physics_process(true)
@@ -24,7 +26,13 @@ func _physics_process(delta):
 		aimDistance=1.5*minimumAimDistance
 		if self.currentWeapon!="Nothing":
 			if self.currentWeapon=="Lance":
-				pass
+				var i=lance.instance()
+				i.position=Vector2()
+				add_child(i)
+			elif self.currentWeapon=="Axe":
+				var i=axe.instance()
+				i.position=Vector2()
+				add_child(i)
 			self.changeWeapon("Nothing")
 			
 	$sprite2.position=aimDistance*(get_global_mouse_position()-self.global_position).normalized()
