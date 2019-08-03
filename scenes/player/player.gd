@@ -6,9 +6,9 @@ var vectorVelocity=Vector2()
 var aimDistance=100
 
 var speedMultiplier=1
-
+var weaponWeight=1
 const minimumAimDistance=100
-const speed=300
+const speed=400
 
 var lance=preload("res://scenes/attacks/lanceAttack.tscn")
 var axe=preload("res://scenes/attacks/axeAttack.tscn")
@@ -16,6 +16,7 @@ var sword=preload("res://scenes/attacks/swordAttack.tscn")
 var katana=preload("res://scenes/attacks/katanaAttack.tscn")
 var dagger=preload("res://scenes/attacks/daggerAttack.tscn")
 var morningStar=preload("res://scenes/attacks/morningStarAttack.tscn")
+
 func _ready():
 	global.player=self
 	self.add_to_group("Player")
@@ -68,11 +69,23 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("ui_rmb"):
 		global.minorShake()
 	
-	vectorVelocity=movement*speed*speedMultiplier #Lerp stuff should be added around here
+	var A=0.66
+	var weaponWeightMultiplier=(1/4.0)*(5 - A - weaponWeight*(1 - A))
+	vectorVelocity=movement*speed*speedMultiplier*weaponWeightMultiplier #Lerp stuff should be added around here
 	vectorVelocity=move_and_slide(vectorVelocity)
 	speedMultiplier=lerp(speedMultiplier,1,0.1)
 	$sprite2.position=aimDistance*(get_global_mouse_position()-self.global_position).normalized()
+
 func changeWeapon(weapon):
 	self.currentWeapon=weapon
 	$label.text=weapon
+	
+	if self.currentWeapon=="Nothing":weaponWeight=1
+	elif self.currentWeapon=="Lance":weaponWeight=3
+	elif self.currentWeapon=="Axe":weaponWeight=5
+	elif self.currentWeapon=="Sword":weaponWeight=2
+	elif self.currentWeapon=="Katana":weaponWeight=3
+	elif self.currentWeapon=="Dagger":weaponWeight=1
+	elif self.currentWeapon=="MorningStar":weaponWeight=5
+	
 	

@@ -1,5 +1,6 @@
 extends Area2D
 
+var weight=2
 var used=false
 const damage=1
 var way

@@ -1,4 +1,5 @@
 extends Area2D
+
 var used=false
 var minipause=preload("res://scenes/minipause/minipause.tscn")
 const damage=1
