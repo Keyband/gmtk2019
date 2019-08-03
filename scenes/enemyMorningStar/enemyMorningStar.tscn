@@ -10,7 +10,6 @@ extents = Vector2( 32, 32 )
 extents = Vector2( 30, 31 )
 
 [node name="enemyMorningStar" type="KinematicBody2D"]
-position = Vector2( 366, 321 )
 script = ExtResource( 1 )
 
 [node name="twnGray" type="Tween" parent="."]

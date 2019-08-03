@@ -18,7 +18,15 @@ var types=[
 
 func _ready():
 	randomize()
-	self.type=types[randi()%types.size()]
+	var index=randi()%types.size()
+	self.type=types[1]#index
+	if index==0:$sprite.frame=1
+	elif index==1:$sprite.frame=2
+	elif index==2:$sprite.frame=0
+	elif index==3:$sprite.frame=3
+	elif index==4:$sprite.frame=4
+	elif index==5:$sprite.frame=5
+	$sprite.rotation=rand_range(-PI/5,PI/5)
 	$label.text=self.type
 
 func _on_weaponLance_body_entered(body):
