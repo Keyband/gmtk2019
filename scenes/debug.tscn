@@ -1,10 +1,15 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://scenes/weaponSpawner/weaponSpawner.gd" type="Script" id=3]
+[ext_resource path="res://scenes/weapon/weapon.gd" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32.6961, 32.6176 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 32, 32 )
 
 [node name="debug" type="Control"]
 anchor_right = 1.0
@@ -30,3 +35,27 @@ shape = SubResource( 1 )
 [node name="area2D" type="Area2D" parent="Node2D/player"]
 
 [node name="collisionShape2D" type="CollisionShape2D" parent="Node2D/player/area2D"]
+
+[node name="label" type="Label" parent="Node2D/player"]
+margin_top = -52.6176
+margin_right = 40.0
+margin_bottom = -38.6176
+text = "Nothing"
+
+[node name="weaponSpawner" type="Node2D" parent="Node2D"]
+script = ExtResource( 3 )
+
+[node name="timer" type="Timer" parent="Node2D/weaponSpawner"]
+
+[node name="weaponLance" type="Area2D" parent="Node2D"]
+position = Vector2( 426, 418 )
+script = ExtResource( 4 )
+
+[node name="label" type="Label" parent="Node2D/weaponLance"]
+margin_right = 40.0
+margin_bottom = 14.0
+text = "Lance"
+
+[node name="collisionShape2D" type="CollisionShape2D" parent="Node2D/weaponLance"]
+shape = SubResource( 2 )
+[connection signal="body_entered" from="Node2D/weaponLance" to="Node2D/weaponLance" method="_on_weaponLance_body_entered"]
