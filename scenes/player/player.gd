@@ -15,6 +15,7 @@ var axe=preload("res://scenes/attacks/axeAttack.tscn")
 var sword=preload("res://scenes/attacks/swordAttack.tscn")
 var katana=preload("res://scenes/attacks/katanaAttack.tscn")
 var dagger=preload("res://scenes/attacks/daggerAttack.tscn")
+var morningStar=preload("res://scenes/attacks/morningStarAttack.tscn")
 func _ready():
 	self.add_to_group("Player")
 	set_physics_process(true)
@@ -50,6 +51,10 @@ func _physics_process(delta):
 				i.global_position=self.global_position
 				i.vectorDirection=(get_global_mouse_position()-self.global_position).normalized()
 				get_parent().add_child(i)
+			elif self.currentWeapon=="MorningStar":
+				var i=morningStar.instance()
+				i.position=Vector2()
+				add_child(i)
 			self.changeWeapon("Nothing")
 	
 	vectorVelocity=movement*speed*speedMultiplier #Lerp stuff should be added around here
