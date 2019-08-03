@@ -31,33 +31,39 @@ func _physics_process(delta):
 		aimDistance=1.5*minimumAimDistance
 		if self.currentWeapon!="Nothing":
 			if self.currentWeapon=="Lance":
+				self.changeWeapon("Attacking")
 				var i=lance.instance()
 				i.position=Vector2()
 				add_child(i)
 			elif self.currentWeapon=="Axe":
+				self.changeWeapon("Attacking")
 				var i=axe.instance()
 				i.position=Vector2()
 				add_child(i)
 			elif self.currentWeapon=="Sword":
+				self.changeWeapon("Attacking")
 				var i=sword.instance()
 				i.position=Vector2()
 				add_child(i)
 			elif self.currentWeapon=="Katana":
+				self.changeWeapon("Attacking")
 				var i=katana.instance()
 				i.position=Vector2()
 				add_child(i)
 				movement=(get_global_mouse_position()-self.global_position).normalized()
 				speedMultiplier=5
 			elif self.currentWeapon=="Dagger":
+				self.changeWeapon("Nothing")
 				var i=dagger.instance()
 				i.global_position=self.global_position
 				i.vectorDirection=(get_global_mouse_position()-self.global_position).normalized()
 				get_parent().add_child(i)
 			elif self.currentWeapon=="MorningStar":
+				self.changeWeapon("Attacking")
 				var i=morningStar.instance()
 				i.position=Vector2()
 				add_child(i)
-			self.changeWeapon("Nothing")
+#			self.changeWeapon("Nothing")
 	
 	if Input.is_action_just_pressed("ui_rmb"):
 		global.minorShake()

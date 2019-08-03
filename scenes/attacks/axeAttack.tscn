@@ -6,7 +6,6 @@
 extents = Vector2( 36, 36 )
 
 [node name="axeAttack" type="Area2D"]
-position = Vector2( 562, 311 )
 script = ExtResource( 1 )
 
 [node name="twnAttack" type="Tween" parent="."]
