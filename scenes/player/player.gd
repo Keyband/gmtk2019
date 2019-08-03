@@ -8,8 +8,9 @@ var aimDistance=18
 
 var speedMultiplier=1
 var weaponWeight=1
-const minimumAimDistance=100
-const speed=225
+const minimumAimDistance=50
+var speed=200
+const maximumSpeed=200
 
 var anim="idle"
 
@@ -77,11 +78,14 @@ func _physics_process(delta):
 		global.minorShake()
 	
 	$sprite.flip_h=true if vectorInput.x<0 else false if vectorInput.x>0 else $sprite.flip_h
-	anim="idle" if vectorInput==Vector2() else "walk"
+	anim="idle" if vectorInput==Vector2() else "walk" if currentWeapon=="Nothing" else "walkWithWeapon"
+	
+	if vectorInput!=Vector2():speed=lerp(speed,maximumSpeed,0.1)
+	else:speed=lerp(speed,0,0.1)
 	
 	var A=0.66
 	var weaponWeightMultiplier=(1/4.0)*(5 - A - weaponWeight*(1 - A))
-	vectorVelocity=movement*speed*speedMultiplier*weaponWeightMultiplier #Lerp stuff should be added around here
+	vectorVelocity=movement*speed*speedMultiplier*weaponWeightMultiplier if vectorInput!=Vector2() else Vector2(lerp(vectorVelocity.x,0,0.2),lerp(vectorVelocity.y,0,0.2)) #Lerp stuff should be added around here
 	vectorVelocity=move_and_slide(vectorVelocity)
 	speedMultiplier=lerp(speedMultiplier,1,0.1)
 	$sprite2.position=aimDistance*(get_global_mouse_position()-self.global_position).normalized()

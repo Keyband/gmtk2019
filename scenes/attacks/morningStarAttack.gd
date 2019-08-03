@@ -12,6 +12,7 @@ func _ready():
 	self.extraRotation=(way*self.extraRotation)+(get_global_mouse_position()-self.global_position).angle()
 	self.rotation=extraRotation
 	$twnAttack.interpolate_property(self,"extraRotation",self.extraRotation,way*(self.extraRotation+3*PI),twnDuration,Tween.TRANS_BACK,Tween.EASE_IN)
+	$twnAttack.interpolate_property($sprite,"scale",Vector2(1,1),Vector2(2,2),twnDuration,Tween.TRANS_BACK,Tween.EASE_OUT)
 	$twnAttack.start()
 	set_physics_process(true)
 

@@ -1,6 +1,6 @@
 extends Node2D
 
-const margin=64*1.25
+const margin=8*1.25
 var weapon=preload("res://scenes/weapon/weapon.tscn")
 
 func _ready():randomize()
