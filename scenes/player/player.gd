@@ -9,8 +9,8 @@ var aimDistance=18
 var speedMultiplier=1
 var weaponWeight=1
 const minimumAimDistance=50
-var speed=200
-const maximumSpeed=200
+var speed=175
+const maximumSpeed=175
 
 var anim="idle"
 

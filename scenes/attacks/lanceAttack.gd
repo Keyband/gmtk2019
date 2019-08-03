@@ -7,7 +7,7 @@ const twnDuration=0.3
 func _ready():
 	self.rotation=(get_global_mouse_position()-self.global_position).angle()
 	$twnAttack.interpolate_property($collisionShape2D,"position:x",$collisionShape2D.position.x,1.5*$collisionShape2D.position.x,twnDuration,Tween.TRANS_BACK,Tween.EASE_IN_OUT)
-	$twnAttack.interpolate_property($sprite,"scale",Vector2(1,1),Vector2(3,1.5),twnDuration,Tween.TRANS_BACK,Tween.EASE_OUT)
+	$twnAttack.interpolate_property($sprite,"scale",Vector2(1,1),Vector2(2,2),twnDuration,Tween.TRANS_BACK,Tween.EASE_OUT)
 	$twnAttack.start()
 	set_physics_process(true)
 

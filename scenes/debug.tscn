@@ -8,9 +8,9 @@
 [ext_resource path="res://resources/animActorDead.tres" type="Animation" id=6]
 [ext_resource path="res://resources/animActorIdle.tres" type="Animation" id=7]
 [ext_resource path="res://resources/animActorWalk.tres" type="Animation" id=8]
-[ext_resource path="res://resources/Sprites/char_24x24.png" type="Texture" id=9]
-[ext_resource path="res://icon.png" type="Texture" id=10]
-[ext_resource path="res://resources/Sprites/Weapons_Icons_16x16.png" type="Texture" id=11]
+[ext_resource path="res://resources/Sprites/Weapons_Icons_16x16.png" type="Texture" id=9]
+[ext_resource path="res://resources/Sprites/char_24x24.png" type="Texture" id=10]
+[ext_resource path="res://icon.png" type="Texture" id=11]
 
 [sub_resource type="Animation" id=2]
 resource_name = "walk"
@@ -76,7 +76,7 @@ tile_set = ExtResource( 2 )
 collision_layer = 7
 collision_mask = 7
 format = 1
-tile_data = PoolIntArray( -65536, 0, 0, -65535, 0, 0, -65534, 0, 0, -65533, 0, 0, -65532, 0, 0, -65531, 0, 0, -65530, 0, 0, -65529, 0, 0, -65528, 0, 0, 0, 0, 0, 8, 0, 0, 65536, 0, 0, 65544, 0, 0, 131072, 0, 0, 131080, 0, 0, 196608, 0, 0, 196616, 0, 0, 262144, 0, 0, 262145, 0, 0, 262146, 0, 0, 262147, 0, 0, 262148, 0, 0, 262149, 0, 0, 262150, 0, 0, 262151, 0, 0, 262152, 0, 0 )
+tile_data = PoolIntArray( -1, 0, 0, -65536, 0, 0, -65535, 0, 0, -65534, 0, 0, -65533, 0, 0, -65532, 0, 0, -65531, 0, 0, -65530, 0, 0, 65535, 0, 0, 5, 0, 0, 6, 0, 0, 131071, 0, 0, 65541, 0, 0, 65542, 0, 0, 196607, 0, 0, 131077, 0, 0, 131078, 0, 0, 262143, 0, 0, 196613, 0, 0, 196614, 0, 0, 327679, 0, 0, 262149, 0, 0, 262150, 0, 0, 393215, 0, 0, 327680, 0, 0, 327681, 0, 0, 327682, 0, 0, 327683, 0, 0, 327684, 0, 0, 327685, 0, 0, 327686, 0, 0, 458751, 0, 0, 393216, 0, 0, 393217, 0, 0, 393218, 0, 0, 393219, 0, 0, 393220, 0, 0, 393221, 0, 0, 393222, 0, 0 )
 
 [node name="weaponSpawner" type="Node2D" parent="Node2D"]
 editor/display_folded = true
@@ -93,7 +93,7 @@ script = ExtResource( 4 )
 autostart = true
 
 [node name="player" type="KinematicBody2D" parent="Node2D"]
-position = Vector2( 302, 158 )
+position = Vector2( 176, 174 )
 script = ExtResource( 5 )
 
 [node name="animationPlayer" type="AnimationPlayer" parent="Node2D/player"]
@@ -103,22 +103,10 @@ anims/idle = ExtResource( 7 )
 anims/walk = SubResource( 2 )
 anims/walkWithWeapon = ExtResource( 8 )
 
-[node name="sprite" type="Sprite" parent="Node2D/player"]
-texture = ExtResource( 9 )
-hframes = 22
-frame = 4
-
-[node name="sprite2" type="Sprite" parent="Node2D/player"]
-modulate = Color( 0, 0, 0, 1 )
-position = Vector2( 50, 0 )
-rotation = 0.785398
-scale = Vector2( 0.05, 0.05 )
-texture = ExtResource( 10 )
-
 [node name="spriteWeapon" type="Sprite" parent="Node2D/player"]
 self_modulate = Color( 1, 1, 1, 0 )
 position = Vector2( 0, 1 )
-texture = ExtResource( 11 )
+texture = ExtResource( 9 )
 offset = Vector2( 12, -6 )
 vframes = 3
 hframes = 10
@@ -129,10 +117,22 @@ script = SubResource( 3 )
 position = Vector2( 18, 0 )
 rotation = 0.785398
 scale = Vector2( 1.25, 1.25 )
-texture = ExtResource( 11 )
+texture = ExtResource( 9 )
 vframes = 3
 hframes = 10
 frame = 10
+
+[node name="sprite" type="Sprite" parent="Node2D/player"]
+texture = ExtResource( 10 )
+hframes = 22
+frame = 4
+
+[node name="sprite2" type="Sprite" parent="Node2D/player"]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 50, 0 )
+rotation = 0.785398
+scale = Vector2( 0.05, 0.05 )
+texture = ExtResource( 11 )
 
 [node name="collisionShape2D" type="CollisionShape2D" parent="Node2D/player"]
 position = Vector2( 6.10352e-05, 0.999969 )
