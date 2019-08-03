@@ -30,17 +30,10 @@ tracks/0/keys = {
 }
 
 [sub_resource type="GDScript" id=3]
-script/source = "tool
-extends Sprite
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = \"text\"
-
-# Called when the node enters the scene tree for the first time.
+script/source = "extends Sprite
 func _ready():
+	self.queue_free()
 	set_physics_process(true)
-	pass # Replace with function body.
 
 func _physics_process(delta):
 	if get_parent().currentWeapon==\"Nothing\":pass
@@ -52,8 +45,7 @@ func _physics_process(delta):
 	elif get_parent().currentWeapon==\"MorningStar\":$spriteWeapon2.frame=5+10
 	$spriteWeapon2.frame
 	self.visible=true if not get_parent().currentWeapon in [\"Nothing\",\"Attacking\"] else false
-	self.rotation=(get_global_mouse_position()-self.global_position).angle()
-"
+	self.rotation=(get_global_mouse_position()-self.global_position).angle()"
 
 [sub_resource type="GDScript" id=4]
 script/source = "tool
@@ -143,7 +135,7 @@ frame = 10
 [node name="sprite" type="Sprite" parent="Node2D/player"]
 texture = ExtResource( 10 )
 hframes = 22
-frame = 4
+frame = 2
 
 [node name="spriteWeapon2" type="Sprite" parent="Node2D/player/sprite"]
 self_modulate = Color( 1, 1, 1, 0 )
@@ -172,19 +164,6 @@ texture = ExtResource( 11 )
 [node name="collisionShape2D" type="CollisionShape2D" parent="Node2D/player"]
 position = Vector2( 6.10352e-05, 0.999969 )
 shape = SubResource( 1 )
-
-[node name="area2D" type="Area2D" parent="Node2D/player"]
-editor/display_folded = true
-
-[node name="collisionShape2D" type="CollisionShape2D" parent="Node2D/player/area2D"]
-
-[node name="label" type="Label" parent="Node2D/player"]
-visible = false
-margin_left = -1.99994
-margin_top = -26.0
-margin_right = 48.0001
-margin_bottom = -12.0
-text = "Nothing"
 
 [node name="del2" type="Node2D" parent="Node2D/player"]
 [connection signal="tween_completed" from="camera2D/twnShake" to="camera2D" method="_on_twnShake_tween_completed"]

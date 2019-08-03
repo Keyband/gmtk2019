@@ -25,7 +25,25 @@ func _ready():
 	global.player=self
 	self.add_to_group("Player")
 	set_physics_process(true)
+	
+func _draw():
+	var angleDeg=rad2deg((get_global_mouse_position()-self.global_position).angle())+90
+	draw_circle_arc_poly(Vector2(),50,-45+angleDeg,45+angleDeg,Color("#80ffadad"))
+	
+func draw_circle_arc_poly(center, radius, angle_from, angle_to, color):
+	#Yeah, this is a shameless copypaste from here: http://docs.godotengine.org/en/latest/tutorials/2d/custom_drawing_in_2d.html
+    var nb_points = 32
+    var points_arc = PoolVector2Array()
+    points_arc.push_back(center)
+    var colors = PoolColorArray([color])
+
+    for i in range(nb_points + 1):
+        var angle_point = deg2rad(angle_from + i * (angle_to - angle_from) / nb_points - 90)
+        points_arc.push_back(center + Vector2(cos(angle_point), sin(angle_point)) * radius)
+    draw_polygon(points_arc, colors)
+	
 func _physics_process(delta):
+	update()
 	if life<=0:print("u ded")
 	
 	if $animationPlayer.name!=anim:$animationPlayer.play(anim)
@@ -92,7 +110,6 @@ func _physics_process(delta):
 
 func changeWeapon(weapon):
 	self.currentWeapon=weapon
-	$label.text=weapon
 	
 	if self.currentWeapon=="Nothing":weaponWeight=1
 	elif self.currentWeapon=="Lance":weaponWeight=3
