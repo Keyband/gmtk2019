@@ -4,17 +4,20 @@ var life=1
 var state="Alive"
 var knockback=0
 var vectorKnockback=Vector2()
-const speed=125
+const speed=85
 var particle=preload("res://scenes/genericParticle/particle.tscn")
-
+var rotationSpeed=0
 func _ready():
 	self.add_to_group("Enemy")
 	set_physics_process(true)
 
 func _physics_process(delta):
+	$area2D.rotation+=delta*rotationSpeed
 	if state=="Alive":
+		rotationSpeed=lerp(rotationSpeed,1.5*PI,0.15)
 		move_and_slide((global.player.global_position-self.global_position).normalized()*speed)
 	elif state=="Dead":
+		rotationSpeed=lerp(rotationSpeed,0,0.1)
 		knockback=lerp(knockback,0,0.1)
 		move_and_slide(knockback*vectorKnockback)
 

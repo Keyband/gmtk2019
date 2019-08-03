@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/camera/camera2D.gd" type="Script" id=1]
 [ext_resource path="res://resources/tilemaps/main.tres" type="TileSet" id=2]
@@ -7,11 +7,16 @@
 [ext_resource path="res://scenes/weapon/weapon.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=6]
 [ext_resource path="res://icon.png" type="Texture" id=7]
-[ext_resource path="res://scenes/attacks/morningStarAttack.tscn" type="PackedScene" id=8]
-[ext_resource path="res://scenes/genericParticle/particle.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/enemyMorningStar/enemyMorningStar.gd" type="Script" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32.6961, 32.6176 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 32, 32 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 30, 31 )
 
 [node name="debug" type="Control"]
 anchor_right = 1.0
@@ -48,9 +53,10 @@ script = ExtResource( 4 )
 autostart = true
 
 [node name="weapon" parent="Node2D" instance=ExtResource( 5 )]
+position = Vector2( 305, 412 )
 
 [node name="player" type="KinematicBody2D" parent="Node2D"]
-position = Vector2( 562.304, 310.618 )
+position = Vector2( 553, 300 )
 script = ExtResource( 6 )
 
 [node name="sprite" type="Sprite" parent="Node2D/player"]
@@ -75,10 +81,34 @@ margin_right = 40.0
 margin_bottom = -38.6176
 text = "Nothing"
 
-[node name="morningStarAttack" parent="Node2D/player" instance=ExtResource( 8 )]
-position = Vector2( -0.304016, 0.381989 )
+[node name="enemyMorningStar" type="KinematicBody2D" parent="."]
+position = Vector2( 366, 321 )
+script = ExtResource( 8 )
 
-[node name="particle" parent="." instance=ExtResource( 9 )]
+[node name="twnGray" type="Tween" parent="enemyMorningStar"]
+
+[node name="twnDespawn" type="Tween" parent="enemyMorningStar"]
+
+[node name="tmrDespawn" type="Timer" parent="enemyMorningStar"]
+wait_time = 2.0
+one_shot = true
+
+[node name="sprite" type="Sprite" parent="enemyMorningStar"]
+texture = ExtResource( 7 )
+
+[node name="collisionShape2D" type="CollisionShape2D" parent="enemyMorningStar"]
+shape = SubResource( 2 )
+
+[node name="area2D" type="Area2D" parent="enemyMorningStar"]
+
+[node name="collisionShape2D" type="CollisionShape2D" parent="enemyMorningStar/area2D"]
+position = Vector2( 150, 0 )
+shape = SubResource( 3 )
+
+[node name="sprite" type="Sprite" parent="enemyMorningStar/area2D/collisionShape2D"]
+texture = ExtResource( 7 )
 [connection signal="tween_completed" from="camera2D/twnShake" to="camera2D" method="_on_twnShake_tween_completed"]
 [connection signal="timeout" from="Node2D/weaponSpawner/timer" to="Node2D/weaponSpawner" method="_on_timer_timeout"]
 [connection signal="timeout" from="Node2D/enemySpawner/timer" to="Node2D/enemySpawner" method="_on_timer_timeout"]
+[connection signal="tween_completed" from="enemyMorningStar/twnDespawn" to="enemyMorningStar" method="_on_twnDespawn_tween_completed"]
+[connection signal="timeout" from="enemyMorningStar/tmrDespawn" to="enemyMorningStar" method="_on_tmrDespawn_timeout"]
