@@ -19,7 +19,7 @@ var types=[
 func _ready():
 	randomize()
 	var index=randi()%types.size()
-	self.type=types[0]#index
+	self.type=types[index]
 	if index==0:$sprite.frame=1
 	elif index==1:$sprite.frame=2
 	elif index==2:$sprite.frame=0
