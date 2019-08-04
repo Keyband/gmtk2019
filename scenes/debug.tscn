@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://resources/Sprites/Stage.png" type="Texture" id=1]
 [ext_resource path="res://scenes/camera/camera2D.gd" type="Script" id=2]
@@ -90,6 +90,26 @@ func _physics_process(delta):
 	self.text=String(showedScore)
 	if showedScore<global.score:showedScore+=1"
 
+[sub_resource type="GDScript" id=9]
+script/source = "extends Sprite
+func _ready():self.rotation=rand_range(0,2*PI)
+func _on_animationPlayer_animation_finished(anim_name):self.queue_free()"
+
+[sub_resource type="Animation" id=10]
+resource_name = "broke"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 20, 21, 22, 23 ]
+}
+
 [node name="debug" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -145,6 +165,7 @@ autostart = true
 
 [node name="player" type="KinematicBody2D" parent="Node2D"]
 position = Vector2( 176, 174 )
+z_index = 5
 script = ExtResource( 5 )
 
 [node name="animationPlayer" type="AnimationPlayer" parent="Node2D/player"]
@@ -312,6 +333,19 @@ text = "0123456789"
 align = 2
 valign = 1
 script = SubResource( 8 )
+
+[node name="animBroke" type="Sprite" parent="."]
+position = Vector2( 192, 189 )
+texture = ExtResource( 10 )
+vframes = 3
+hframes = 10
+frame = 23
+script = SubResource( 9 )
+
+[node name="animationPlayer" type="AnimationPlayer" parent="animBroke"]
+autoplay = "broke"
+anims/broke = SubResource( 10 )
 [connection signal="tween_completed" from="camera2D/twnShake" to="camera2D" method="_on_twnShake_tween_completed"]
 [connection signal="timeout" from="Node2D/weaponSpawner/timer" to="Node2D/weaponSpawner" method="_on_timer_timeout"]
 [connection signal="timeout" from="Node2D/enemySpawner/timer" to="Node2D/enemySpawner" method="_on_timer_timeout"]
+[connection signal="animation_finished" from="animBroke/animationPlayer" to="animBroke" method="_on_animationPlayer_animation_finished"]

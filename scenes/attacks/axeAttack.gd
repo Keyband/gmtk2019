@@ -2,6 +2,7 @@ extends Area2D
 
 var used=false
 var minipause=preload("res://scenes/minipause/minipause.tscn")
+var animBroke=preload("res://scenes/weapon/animBroke.tscn")
 const damage=1
 var way
 var extraRotation=-PI/4
@@ -22,6 +23,9 @@ func _physics_process(delta):
 func _on_twnAttack_tween_completed(object, key):
 	if used:
 		get_parent().changeWeapon("Nothing")
+		var i=animBroke.instance()
+		i.global_position=$sprite.global_position
+		get_parent().add_child(i)
 	else:
 		get_parent().changeWeapon("Axe")
 	self.queue_free()

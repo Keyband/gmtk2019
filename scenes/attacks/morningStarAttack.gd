@@ -2,6 +2,7 @@ extends Area2D
 
 var used=false
 var minipause=preload("res://scenes/minipause/minipause.tscn")
+var animBroke=preload("res://scenes/weapon/animBroke.tscn")
 const damage=1
 var way
 var extraRotation=-PI/4
@@ -14,6 +15,14 @@ func _ready():
 	$twnAttack.interpolate_property(self,"extraRotation",self.extraRotation,way*(self.extraRotation+3*PI),twnDuration,Tween.TRANS_BACK,Tween.EASE_IN)
 	$twnAttack.interpolate_property($sprite,"scale",Vector2(1,1),Vector2(2,2),twnDuration,Tween.TRANS_BACK,Tween.EASE_OUT)
 	$twnAttack.start()
+	
+	var duration=0.25
+	for node in $sprite.get_children():
+		var target=node.position.x
+		$twnChain.interpolate_property(node,"position:x",-53,target,duration,Tween.TRANS_QUINT,Tween.EASE_OUT)
+	$twnChain.interpolate_property(self,"rotationSpeed",0,1.5*PI,0.75*duration,Tween.TRANS_QUINT,Tween.EASE_OUT)
+	$twnChain.start()
+	
 	set_physics_process(true)
 
 func _physics_process(delta):
@@ -22,6 +31,9 @@ func _physics_process(delta):
 func _on_twnAttack_tween_completed(object, key):
 	if used:
 		get_parent().changeWeapon("Nothing")
+		var i=animBroke.instance()
+		i.global_position=$sprite.global_position
+		get_parent().add_child(i)
 	else:
 		get_parent().changeWeapon("MorningStar")
 	self.queue_free()

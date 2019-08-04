@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 var minipause=preload("res://scenes/minipause/minipause.tscn")
+var animBroke=preload("res://scenes/weapon/animBroke.tscn")
 const damage=1
 var speed=750
 var vectorDirection=Vector2()
@@ -27,6 +28,12 @@ func _on_area2D_body_entered(body):
 		body.takeDamage(self.damage)
 		var i=minipause.instance()
 		get_parent().add_child(i)
+		var j=animBroke.instance()
+		j.global_position=$sprite.global_position
+		get_parent().add_child(j)
 		self.queue_free()
 	elif body is StaticBody2D:
+		var i=animBroke.instance()
+		i.global_position=$sprite.global_position
+		get_parent().add_child(i)
 		self.queue_free()

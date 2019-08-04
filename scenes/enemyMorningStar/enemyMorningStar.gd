@@ -78,7 +78,6 @@ func _on_twnEnter_tween_all_completed():
 	var duration=3
 	for node in $area2D/collisionShape2D.get_children():
 		var target=node.position.x
-		print(target)
 		$twnChain.interpolate_property(node,"position:x",-53,target,duration,Tween.TRANS_QUINT,Tween.EASE_OUT)
 	$twnChain.interpolate_property(self,"rotationSpeed",0,1.5*PI,0.75*duration,Tween.TRANS_QUINT,Tween.EASE_OUT)
 	$twnChain.start()
