@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Pan_Hit.wav-d870ad412eb68f904c916ad7eb0bf892.sample"
+
+[deps]
+
+source_file="res://resources/Sounds/Pan_Hit.wav"
+dest_files=[ "res://.import/Pan_Hit.wav-d870ad412eb68f904c916ad7eb0bf892.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

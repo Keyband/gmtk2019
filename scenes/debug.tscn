@@ -403,9 +403,9 @@ custom_constants/margin_left = 20
 custom_constants/margin_bottom = 20
 
 [node name="panelContainer" type="PanelContainer" parent="canvasLayer/greetings/marginContainer"]
-margin_left = 65.0
+margin_left = 63.0
 margin_top = 84.0
-margin_right = 259.0
+margin_right = 257.0
 margin_bottom = 235.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
