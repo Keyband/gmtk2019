@@ -13,7 +13,7 @@ var speed=175
 const maximumSpeed=175
 
 var anim="idle"
-var hitboxIndicatorProperties={"center":Vector2(),"radius":50,"angleRange":45,"color":Color("#aabd4882")}
+var hitboxIndicatorProperties={"center":Vector2(),"radius":50,"angleRange":45,"color":Color("#55bd4882")}
 var lance=preload("res://scenes/attacks/lanceAttack.tscn")
 var axe=preload("res://scenes/attacks/axeAttack.tscn")
 var sword=preload("res://scenes/attacks/swordAttack.tscn")
@@ -32,7 +32,7 @@ func _draw():
 #						1.1*hitboxIndicatorProperties["radius"],
 #						-1.1*hitboxIndicatorProperties["angleRange"]+angleDeg,
 #						1.1*hitboxIndicatorProperties["angleRange"]+angleDeg,
-#						Color("#aa000000"))
+#						Color("#55000000"))
 	draw_circle_arc_poly(hitboxIndicatorProperties["center"],
 						hitboxIndicatorProperties["radius"],
 						-hitboxIndicatorProperties["angleRange"]+angleDeg,
@@ -130,42 +130,42 @@ func changeWeapon(weapon):
 	elif self.currentWeapon=="Lance":
 #		$sfxPickup.play()
 		weaponWeight=3
-		$twnDraw.interpolate_property(self,"hitboxIndicatorProperties:color",self.hitboxIndicatorProperties['color'],Color("#aabd4882"),twnDuration,Tween.TRANS_CUBIC,Tween.EASE_OUT)
+		$twnDraw.interpolate_property(self,"hitboxIndicatorProperties:color",self.hitboxIndicatorProperties['color'],Color("#55bd4882"),twnDuration,Tween.TRANS_CUBIC,Tween.EASE_OUT)
 		$twnDraw.interpolate_property(self,"hitboxIndicatorProperties:radius",self.hitboxIndicatorProperties['radius'],60,twnDuration,Tween.TRANS_CUBIC,Tween.EASE_OUT)
 		$twnDraw.interpolate_property(self,"hitboxIndicatorProperties:angleRange",self.hitboxIndicatorProperties['angleRange'],15,twnDuration,Tween.TRANS_CUBIC,Tween.EASE_OUT)
 		$twnDraw.start()
 	elif self.currentWeapon=="Axe":
 #		$sfxPickup.play()
 		weaponWeight=5
-		$twnDraw.interpolate_property(self,"hitboxIndicatorProperties:color",self.hitboxIndicatorProperties['color'],Color("#aabd4882"),twnDuration,Tween.TRANS_CUBIC,Tween.EASE_OUT)
+		$twnDraw.interpolate_property(self,"hitboxIndicatorProperties:color",self.hitboxIndicatorProperties['color'],Color("#55bd4882"),twnDuration,Tween.TRANS_CUBIC,Tween.EASE_OUT)
 		$twnDraw.interpolate_property(self,"hitboxIndicatorProperties:radius",self.hitboxIndicatorProperties['radius'],50,twnDuration,Tween.TRANS_CUBIC,Tween.EASE_OUT)
 		$twnDraw.interpolate_property(self,"hitboxIndicatorProperties:angleRange",self.hitboxIndicatorProperties['angleRange'],60,twnDuration,Tween.TRANS_CUBIC,Tween.EASE_OUT)
 		$twnDraw.start()
 	elif self.currentWeapon=="Sword":
 #		$sfxPickup.play()
 		weaponWeight=2
-		$twnDraw.interpolate_property(self,"hitboxIndicatorProperties:color",self.hitboxIndicatorProperties['color'],Color("#aabd4882"),twnDuration,Tween.TRANS_CUBIC,Tween.EASE_OUT)
+		$twnDraw.interpolate_property(self,"hitboxIndicatorProperties:color",self.hitboxIndicatorProperties['color'],Color("#55bd4882"),twnDuration,Tween.TRANS_CUBIC,Tween.EASE_OUT)
 		$twnDraw.interpolate_property(self,"hitboxIndicatorProperties:radius",self.hitboxIndicatorProperties['radius'],50,twnDuration,Tween.TRANS_CUBIC,Tween.EASE_OUT)
 		$twnDraw.interpolate_property(self,"hitboxIndicatorProperties:angleRange",self.hitboxIndicatorProperties['angleRange'],45,twnDuration,Tween.TRANS_CUBIC,Tween.EASE_OUT)
 		$twnDraw.start()
 	elif self.currentWeapon=="Katana":
 #		$sfxPickup.play()
 		weaponWeight=3
-		$twnDraw.interpolate_property(self,"hitboxIndicatorProperties:color",self.hitboxIndicatorProperties['color'],Color("#aabd4882"),twnDuration,Tween.TRANS_CUBIC,Tween.EASE_OUT)
+		$twnDraw.interpolate_property(self,"hitboxIndicatorProperties:color",self.hitboxIndicatorProperties['color'],Color("#55bd4882"),twnDuration,Tween.TRANS_CUBIC,Tween.EASE_OUT)
 		$twnDraw.interpolate_property(self,"hitboxIndicatorProperties:radius",self.hitboxIndicatorProperties['radius'],75,twnDuration,Tween.TRANS_CUBIC,Tween.EASE_OUT)
 		$twnDraw.interpolate_property(self,"hitboxIndicatorProperties:angleRange",self.hitboxIndicatorProperties['angleRange'],45,twnDuration,Tween.TRANS_CUBIC,Tween.EASE_OUT)
 		$twnDraw.start()
 	elif self.currentWeapon=="Dagger":
 #		$sfxPickup.play()
 		weaponWeight=1
-		$twnDraw.interpolate_property(self,"hitboxIndicatorProperties:color",self.hitboxIndicatorProperties['color'],Color("#aabd4882"),twnDuration,Tween.TRANS_CUBIC,Tween.EASE_OUT)
+		$twnDraw.interpolate_property(self,"hitboxIndicatorProperties:color",self.hitboxIndicatorProperties['color'],Color("#55bd4882"),twnDuration,Tween.TRANS_CUBIC,Tween.EASE_OUT)
 		$twnDraw.interpolate_property(self,"hitboxIndicatorProperties:radius",self.hitboxIndicatorProperties['radius'],300,twnDuration,Tween.TRANS_CUBIC,Tween.EASE_OUT)
 		$twnDraw.interpolate_property(self,"hitboxIndicatorProperties:angleRange",self.hitboxIndicatorProperties['angleRange'],0.5,twnDuration,Tween.TRANS_CUBIC,Tween.EASE_OUT)
 		$twnDraw.start()
 	elif self.currentWeapon=="MorningStar":
 #		$sfxPickup.play()
 		weaponWeight=5
-		$twnDraw.interpolate_property(self,"hitboxIndicatorProperties:color",self.hitboxIndicatorProperties['color'],Color("#aabd4882"),twnDuration,Tween.TRANS_CUBIC,Tween.EASE_OUT)
+		$twnDraw.interpolate_property(self,"hitboxIndicatorProperties:color",self.hitboxIndicatorProperties['color'],Color("#55bd4882"),twnDuration,Tween.TRANS_CUBIC,Tween.EASE_OUT)
 		$twnDraw.interpolate_property(self,"hitboxIndicatorProperties:radius",self.hitboxIndicatorProperties['radius'],50,twnDuration,Tween.TRANS_CUBIC,Tween.EASE_OUT)
 		$twnDraw.interpolate_property(self,"hitboxIndicatorProperties:angleRange",self.hitboxIndicatorProperties['angleRange'],180,twnDuration,Tween.TRANS_CUBIC,Tween.EASE_OUT)
 		$twnDraw.start()

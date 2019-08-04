@@ -12,8 +12,8 @@ func _physics_process(delta):
 func minorShake():
 	set_physics_process(true)
 	if $twnShake.is_active():
-		var initialAmount=clamp(amount+1,0,15)
-		var duration=clamp($twnShake.get_runtime()+0.1,0,2)
+		var initialAmount=clamp(amount+1,0,5)
+		var duration=clamp($twnShake.get_runtime()+0.1,0,1)
 		$twnShake.interpolate_property(self,"amount",initialAmount,0,duration,Tween.TRANS_EXPO,Tween.EASE_OUT)
 		$twnShake.start()
 	else:

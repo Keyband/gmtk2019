@@ -25,7 +25,7 @@ func _on_twnAttack_tween_completed(object, key):
 		get_parent().changeWeapon("Nothing")
 		var i=animBroke.instance()
 		i.global_position=$sprite.global_position
-		get_parent().add_child(i)
+		get_parent().get_parent().add_child(i)
 	else:
 		get_parent().changeWeapon("Katana")
 	self.queue_free()
