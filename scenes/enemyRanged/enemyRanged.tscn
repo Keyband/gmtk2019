@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/enemyRanged/enemyRanged.gd" type="Script" id=1]
 [ext_resource path="res://resources/animActorDead.tres" type="Animation" id=2]
@@ -9,7 +9,10 @@
 [ext_resource path="res://resources/Sprites/Enemie2_24x24.png" type="Texture" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 7, 10 )
+extents = Vector2( 5, 9 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 6, 10 )
 
 [node name="enemyRanged" type="KinematicBody2D"]
 script = ExtResource( 1 )
@@ -48,7 +51,14 @@ frame = 2
 [node name="collisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 2 )
 shape = SubResource( 1 )
+
+[node name="area2D" type="Area2D" parent="."]
+
+[node name="collisionShape2D" type="CollisionShape2D" parent="area2D"]
+position = Vector2( 0, 2 )
+shape = SubResource( 2 )
 [connection signal="tween_completed" from="twnEnter" to="." method="_on_twnEnter_tween_completed"]
 [connection signal="tween_completed" from="twnDespawn" to="." method="_on_twnDespawn_tween_completed"]
 [connection signal="timeout" from="tmrDespawn" to="." method="_on_tmrDespawn_timeout"]
 [connection signal="timeout" from="tmrAttack" to="." method="_on_tmrAttack_timeout"]
+[connection signal="body_entered" from="area2D" to="." method="_on_area2D_body_entered"]

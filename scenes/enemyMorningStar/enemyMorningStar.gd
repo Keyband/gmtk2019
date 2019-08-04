@@ -48,6 +48,7 @@ func takeDamage(amount):
 		self.set_collision_layer_bit(1,true)
 		self.set_collision_mask_bit(0,false)
 		self.set_collision_mask_bit(1,true)
+		$area2D/collisionShape2D.disabled=true
 		anim="animActorDead"
 		$animationPlayer.play(anim)
 		knockback=rand_range(400,700)

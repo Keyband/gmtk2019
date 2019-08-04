@@ -10,6 +10,8 @@ var dagger=preload("res://scenes/enemyRanged/enemyDaggerAttack.tscn")
 var canAttack=true
 var vectorTargetPosition=Vector2()
 var anim="animActorIdle"
+var rangeMin=50
+var rangeMax=60
 func _ready():
 	self.add_to_group("Enemy")
 	self.global_position=Vector2(vectorTargetPosition.x-50,vectorTargetPosition.y-100)
@@ -25,7 +27,7 @@ func _physics_process(delta):
 	else: $spriteShadow.position.y=12
 	if state=="Alive":
 		var vectorDistanceToPlayer=global.player.global_position-self.global_position
-		if vectorDistanceToPlayer.length()>50:
+		if vectorDistanceToPlayer.length()>rangeMin:
 			if $animationPlayer.name!=anim:$animationPlayer.play(anim)
 			var vectorMovement=move_and_slide((global.player.global_position-self.global_position).normalized()*speed)
 			$sprite.flip_h=true if vectorMovement.x<0 else false if vectorMovement.x>0 else $sprite.flip_h
@@ -33,7 +35,7 @@ func _physics_process(delta):
 #			if $animationPlayer.name!=anim:$animationPlayer.play(anim)
 #			move_and_slide(vectorDistanceToPlayer.normalized()*speed)
 #			anim="animActorIdle" if vectorMovement==Vector2() else "animActorWalk"
-		elif vectorDistanceToPlayer.length()<75:
+		elif vectorDistanceToPlayer.length()<rangeMax:
 			if $animationPlayer.name!=anim:$animationPlayer.play(anim)
 			var vectorMovement=move_and_slide(-(global.player.global_position-self.global_position).normalized()*speed)
 			$sprite.flip_h=true if vectorMovement.x<0 else false if vectorMovement.x>0 else $sprite.flip_h
@@ -79,7 +81,7 @@ func _on_twnDespawn_tween_completed(object, key):
 func attack():
 	var vectorDistanceToPlayer=global.player.global_position-self.global_position
 	if canAttack:
-		if vectorDistanceToPlayer.length()<75 and vectorDistanceToPlayer.length()>50:
+		if vectorDistanceToPlayer.length()<rangeMax and vectorDistanceToPlayer.length()>rangeMin:
 			var i=dagger.instance()
 			i.global_position=self.global_position
 			i.vectorDirection=vectorDistanceToPlayer.normalized()
@@ -94,3 +96,7 @@ func _on_tmrAttack_timeout():
 
 func _on_twnEnter_tween_completed(object, key):
 	if self.state!="Dead":self.state="Alive"
+
+func _on_area2D_body_entered(body):
+	if body.is_in_group("Player"):
+		body.takeDamage(1)
