@@ -27,7 +27,7 @@ func _ready():
 	elif index==4:$sprite.frame=4
 	elif index==5:$sprite.frame=5
 	$sprite.rotation=rand_range(-PI/5,PI/5)
-	$label.text=self.type
+	$spriteShadow.rotation=$sprite.rotation
 
 func _on_weaponLance_body_entered(body):
 	if body.is_in_group("Player"):
