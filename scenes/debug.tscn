@@ -122,7 +122,7 @@ autostart = true
 
 [node name="enemySpawner" type="Position2D" parent="Node2D"]
 editor/display_folded = true
-position = Vector2( 32, 33 )
+position = Vector2( 69, 140 )
 script = ExtResource( 4 )
 
 [node name="timer" type="Timer" parent="Node2D/enemySpawner"]

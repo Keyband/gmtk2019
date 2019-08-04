@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 var minipause=preload("res://scenes/minipause/minipause.tscn")
 const damage=1
-var speed=450
+var speed=200
 var vectorDirection=Vector2()
 
 const twnDuration=0.25

@@ -1,15 +1,22 @@
 extends KinematicBody2D
 
 var life=1
-var state="Alive"
+var state="Entering"
 var knockback=0
 var vectorKnockback=Vector2()
 const speed=65
 var particle=preload("res://scenes/genericParticle/particle.tscn")
 var anim="animActorIdle"
+var vectorTargetPosition=Vector2()
 
 func _ready():
 	self.add_to_group("Enemy")
+	self.global_position=Vector2(vectorTargetPosition.x-50,vectorTargetPosition.y-100)
+	var duration=1.5
+	$twnEnter.interpolate_property(self,"global_position:x",self.global_position.x,vectorTargetPosition.x,0.9*duration,Tween.TRANS_LINEAR,Tween.EASE_IN)
+	$twnEnter.interpolate_property(self,"global_position:y",self.global_position.y,vectorTargetPosition.y,duration,Tween.TRANS_BOUNCE,Tween.EASE_OUT)
+#	$twnEnter.interpolate_property($spriteShadow,"position:x",$spriteShadow.position.x,0,0.9*duration,Tween.TRANS_LINEAR,Tween.EASE_IN)
+	$twnEnter.start()
 	set_physics_process(true)
 
 func _physics_process(delta):
@@ -52,3 +59,5 @@ func _on_tmrDespawn_timeout():
 
 func _on_twnDespawn_tween_completed(object, key):
 	self.queue_free()
+
+func _on_twnEnter_tween_completed(object, key):self.state="Alive"
