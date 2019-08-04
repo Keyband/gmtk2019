@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-var life=1
+var life=3
 var currentWeapon="Nothing"
 
 var vectorVelocity=Vector2()
@@ -121,3 +121,12 @@ func changeWeapon(weapon):
 	
 func takeDamage(amount):
 	self.life-=amount
+	if life<=0:
+		print("Dead")
+	elif life<=1:
+		$"hearts/3".frame=1
+		$"hearts/2".frame=1
+	elif life<=2:
+		$"hearts/3".frame=1
+	elif life<=3: #???
+		pass

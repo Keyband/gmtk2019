@@ -1,16 +1,17 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://resources/Sprites/Stage.png" type="Texture" id=1]
 [ext_resource path="res://scenes/camera/camera2D.gd" type="Script" id=2]
 [ext_resource path="res://scenes/weaponSpawner/weaponSpawner.gd" type="Script" id=3]
 [ext_resource path="res://scenes/enemySpawner/enemySpawner.gd" type="Script" id=4]
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=5]
-[ext_resource path="res://resources/animActorDead.tres" type="Animation" id=6]
-[ext_resource path="res://resources/animActorIdle.tres" type="Animation" id=7]
-[ext_resource path="res://resources/animActorWalk.tres" type="Animation" id=8]
-[ext_resource path="res://resources/Sprites/Weapons_Icons_16x16.png" type="Texture" id=9]
-[ext_resource path="res://resources/Sprites/char_24x24.png" type="Texture" id=10]
-[ext_resource path="res://icon.png" type="Texture" id=11]
+[ext_resource path="res://resources/Sprites/Hearts_9x8.png" type="Texture" id=6]
+[ext_resource path="res://resources/animActorDead.tres" type="Animation" id=7]
+[ext_resource path="res://resources/animActorIdle.tres" type="Animation" id=8]
+[ext_resource path="res://resources/animActorWalk.tres" type="Animation" id=9]
+[ext_resource path="res://resources/Sprites/Weapons_Icons_16x16.png" type="Texture" id=10]
+[ext_resource path="res://resources/Sprites/char_24x24.png" type="Texture" id=11]
+[ext_resource path="res://icon.png" type="Texture" id=12]
 
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 10, 160 )
@@ -126,18 +127,37 @@ autostart = true
 position = Vector2( 176, 174 )
 script = ExtResource( 5 )
 
+[node name="hearts" type="Node2D" parent="Node2D/player"]
+z_index = 10
+z_as_relative = false
+
+[node name="1" type="Sprite" parent="Node2D/player/hearts"]
+position = Vector2( -10, -15 )
+texture = ExtResource( 6 )
+hframes = 2
+
+[node name="2" type="Sprite" parent="Node2D/player/hearts"]
+position = Vector2( 0, -15 )
+texture = ExtResource( 6 )
+hframes = 2
+
+[node name="3" type="Sprite" parent="Node2D/player/hearts"]
+position = Vector2( 10, -15 )
+texture = ExtResource( 6 )
+hframes = 2
+
 [node name="animationPlayer" type="AnimationPlayer" parent="Node2D/player"]
 autoplay = "idle"
-anims/dead = ExtResource( 6 )
-anims/idle = ExtResource( 7 )
+anims/dead = ExtResource( 7 )
+anims/idle = ExtResource( 8 )
 anims/walk = SubResource( 2 )
-anims/walkWithWeapon = ExtResource( 8 )
+anims/walkWithWeapon = ExtResource( 9 )
 
 [node name="spriteWeapon" type="Sprite" parent="Node2D/player"]
 visible = false
 self_modulate = Color( 1, 1, 1, 0 )
 position = Vector2( 0, 1 )
-texture = ExtResource( 9 )
+texture = ExtResource( 10 )
 offset = Vector2( 12, -6 )
 vframes = 3
 hframes = 10
@@ -148,19 +168,19 @@ script = SubResource( 3 )
 position = Vector2( 18, 0 )
 rotation = 0.785398
 scale = Vector2( 1.25, 1.25 )
-texture = ExtResource( 9 )
+texture = ExtResource( 10 )
 vframes = 3
 hframes = 10
 frame = 10
 
 [node name="sprite" type="Sprite" parent="Node2D/player"]
-texture = ExtResource( 10 )
+texture = ExtResource( 11 )
 hframes = 22
 frame = 2
 
 [node name="spriteWeapon2" type="Sprite" parent="Node2D/player/sprite"]
 self_modulate = Color( 1, 1, 1, 0 )
-texture = ExtResource( 9 )
+texture = ExtResource( 10 )
 offset = Vector2( 12, -6 )
 vframes = 3
 hframes = 10
@@ -170,7 +190,7 @@ script = SubResource( 4 )
 [node name="spriteWeapon2" type="Sprite" parent="Node2D/player/sprite/spriteWeapon2"]
 position = Vector2( 13, -3 )
 scale = Vector2( 1.25, 1.25 )
-texture = ExtResource( 9 )
+texture = ExtResource( 10 )
 vframes = 3
 hframes = 10
 frame = 10
@@ -180,7 +200,7 @@ modulate = Color( 0, 0, 0, 1 )
 position = Vector2( 50, 0 )
 rotation = 0.785398
 scale = Vector2( 0.05, 0.05 )
-texture = ExtResource( 11 )
+texture = ExtResource( 12 )
 
 [node name="collisionShape2D" type="CollisionShape2D" parent="Node2D/player"]
 position = Vector2( 6.10352e-05, 0.999969 )
