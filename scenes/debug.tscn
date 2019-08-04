@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://resources/Sprites/Stage.png" type="Texture" id=1]
 [ext_resource path="res://scenes/camera/camera2D.gd" type="Script" id=2]
@@ -118,7 +118,7 @@ func _physics_process(delta):
 func _on_twnGoAway_tween_completed(object, key):self.queue_free()"
 
 [sub_resource type="StyleBoxFlat" id=11]
-bg_color = Color( 0.5, 0.344482, 0.195312, 1 )
+bg_color = Color( 0.501961, 0.345098, 0.196078, 0.682353 )
 border_width_left = 5
 border_width_top = 5
 border_width_right = 5
@@ -128,6 +128,16 @@ corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
+
+[sub_resource type="DynamicFont" id=12]
+size = 48
+outline_size = 3
+outline_color = Color( 0.560784, 0, 0, 1 )
+extra_spacing_char = 5
+font_data = ExtResource( 16 )
+
+[sub_resource type="DynamicFont" id=13]
+font_data = ExtResource( 16 )
 
 [node name="debug" type="Control"]
 anchor_right = 1.0
@@ -393,10 +403,10 @@ custom_constants/margin_left = 20
 custom_constants/margin_bottom = 20
 
 [node name="panelContainer" type="PanelContainer" parent="canvasLayer/greetings/marginContainer"]
-margin_left = 32.0
-margin_top = 118.0
-margin_right = 288.0
-margin_bottom = 202.0
+margin_left = 65.0
+margin_top = 84.0
+margin_right = 259.0
+margin_bottom = 235.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 custom_styles/panel = SubResource( 11 )
@@ -404,8 +414,8 @@ custom_styles/panel = SubResource( 11 )
 [node name="marginContainer" type="MarginContainer" parent="canvasLayer/greetings/marginContainer/panelContainer"]
 margin_left = 5.0
 margin_top = 5.0
-margin_right = 251.0
-margin_bottom = 79.0
+margin_right = 189.0
+margin_bottom = 146.0
 custom_constants/margin_right = 5
 custom_constants/margin_top = 5
 custom_constants/margin_left = 5
@@ -414,35 +424,37 @@ custom_constants/margin_bottom = 5
 [node name="vBoxContainer" type="VBoxContainer" parent="canvasLayer/greetings/marginContainer/panelContainer/marginContainer"]
 margin_left = 5.0
 margin_top = 5.0
-margin_right = 241.0
-margin_bottom = 69.0
+margin_right = 179.0
+margin_bottom = 136.0
 
 [node name="label" type="Label" parent="canvasLayer/greetings/marginContainer/panelContainer/marginContainer/vBoxContainer"]
-margin_right = 236.0
-margin_bottom = 26.0
-custom_fonts/font = ExtResource( 14 )
+margin_right = 174.0
+margin_bottom = 79.0
+custom_fonts/font = SubResource( 12 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 2
 custom_constants/shadow_offset_y = 2
-text = "SUPER NOME DO JOGO"
+text = "JANK
+WARRIOR"
 align = 1
 
 [node name="hSeparator" type="HSeparator" parent="canvasLayer/greetings/marginContainer/panelContainer/marginContainer/vBoxContainer"]
 modulate = Color( 0, 0, 0, 0 )
-margin_top = 30.0
-margin_right = 236.0
-margin_bottom = 34.0
+margin_top = 83.0
+margin_right = 174.0
+margin_bottom = 98.0
 custom_constants/separation = 15
 
 [node name="label2" type="Label" parent="canvasLayer/greetings/marginContainer/panelContainer/marginContainer/vBoxContainer"]
-margin_top = 38.0
-margin_right = 236.0
-margin_bottom = 64.0
-custom_fonts/font = ExtResource( 14 )
+margin_top = 102.0
+margin_right = 174.0
+margin_bottom = 131.0
+custom_fonts/font = SubResource( 13 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 2
 custom_constants/shadow_offset_y = 2
-text = "LMB PRA JOGAR"
+text = "PRESS THE LEFT MOUSE
+BUTTON TO START"
 align = 1
 [connection signal="tween_completed" from="camera2D/twnShake" to="camera2D" method="_on_twnShake_tween_completed"]
 [connection signal="timeout" from="Node2D/weaponSpawner/timer" to="Node2D/weaponSpawner" method="_on_timer_timeout"]

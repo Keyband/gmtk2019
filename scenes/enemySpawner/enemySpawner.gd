@@ -13,8 +13,9 @@ func _on_timer_timeout():
 			numberOfEnemies+=1
 	$timer.wait_time=(8/5)*numberOfEnemies+rand_range(1.0,2.0)
 	var percentage=randf()
-	if percentage<0.8:var i=enemy.instance()
-	elif percentage<0.95:var i=enemyRanged.instance()
-	else:var i=enemyMorningStar.instance()
+	var i
+	if percentage<0.8:i=enemy.instance()
+	elif percentage<0.95:i=enemyRanged.instance()
+	else:i=enemyMorningStar.instance()
 	i.vectorTargetPosition=self.global_position
 	get_parent().add_child(i)

@@ -24,6 +24,7 @@ var morningStar=preload("res://scenes/attacks/morningStarAttack.tscn")
 
 func _ready():
 	global.player=self
+	self.global_position=Vector2(160,160)
 	self.add_to_group("Player")
 	set_physics_process(true)
 	
