@@ -1,5 +1,5 @@
 extends Area2D
-
+const scoreValue=50
 export (String,"Lance","Axe","Sword") var type="Lance"
 var types=[
 	"Lance",		#0
@@ -52,6 +52,7 @@ func _ready():
 func _on_weaponLance_body_entered(body):
 	if body.is_in_group("Player"):
 		if body.currentWeapon=="Nothing":
+			global.score+=self.scoreValue
 			body.changeWeapon(self.type)
 			self.queue_free()
 

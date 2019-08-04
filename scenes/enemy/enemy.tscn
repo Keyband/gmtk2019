@@ -8,7 +8,7 @@
 [ext_resource path="res://resources/Sprites/Shadow1.png" type="Texture" id=6]
 [ext_resource path="res://resources/Sprites/Enemy_24x24.png" type="Texture" id=7]
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 10 )
 
 [node name="enemy" type="KinematicBody2D"]
@@ -42,7 +42,7 @@ frame = 5
 
 [node name="collisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 1 )
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 [connection signal="tween_completed" from="twnEnter" to="." method="_on_twnEnter_tween_completed"]
 [connection signal="tween_completed" from="twnDespawn" to="." method="_on_twnDespawn_tween_completed"]
 [connection signal="timeout" from="tmrDespawn" to="." method="_on_tmrDespawn_timeout"]

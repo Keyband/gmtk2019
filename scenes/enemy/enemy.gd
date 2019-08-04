@@ -1,5 +1,5 @@
 extends KinematicBody2D
-
+const scoreValue=10
 var life=1
 var state="Entering"
 var knockback=0
@@ -36,6 +36,7 @@ func _physics_process(delta):
 func takeDamage(amount):
 	life-=amount
 	if life<=0:
+		global.score+=self.scoreValue
 		self.state="Dead"
 		self.remove_from_group("Enemy")
 		self.set_collision_layer_bit(0,false)

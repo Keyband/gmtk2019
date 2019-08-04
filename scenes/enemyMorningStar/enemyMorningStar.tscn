@@ -9,10 +9,10 @@
 [ext_resource path="res://resources/Sprites/Shadow1.png" type="Texture" id=7]
 [ext_resource path="res://resources/Sprites/Enemy3_24x25.png" type="Texture" id=8]
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6, 7 )
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 6, 10 )
 
 [node name="enemyMorningStar" type="KinematicBody2D"]
@@ -35,7 +35,7 @@ position = Vector2( 5, 4 )
 
 [node name="collisionShape2D" type="CollisionShape2D" parent="area2D"]
 position = Vector2( 58, 0 )
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="1" type="Sprite" parent="area2D/collisionShape2D"]
 position = Vector2( -53, 0 )
@@ -109,7 +109,7 @@ hframes = 14
 frame = 8
 
 [node name="collisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 [connection signal="tween_completed" from="twnEnter" to="." method="_on_twnEnter_tween_completed"]
 [connection signal="tween_completed" from="twnDespawn" to="." method="_on_twnDespawn_tween_completed"]
 [connection signal="timeout" from="tmrDespawn" to="." method="_on_tmrDespawn_timeout"]
