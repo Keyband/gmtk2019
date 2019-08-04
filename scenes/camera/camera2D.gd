@@ -17,7 +17,7 @@ func minorShake():
 		$twnShake.interpolate_property(self,"amount",initialAmount,0,duration,Tween.TRANS_EXPO,Tween.EASE_OUT)
 		$twnShake.start()
 	else:
-		var initialAmount=7.5
+		var initialAmount=3.5
 		var duration=0.4
 		$twnShake.interpolate_property(self,"amount",initialAmount,0,duration,Tween.TRANS_EXPO,Tween.EASE_OUT)
 		$twnShake.start()
