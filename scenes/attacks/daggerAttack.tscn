@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/attacks/daggerAttack.gd" type="Script" id=1]
 [ext_resource path="res://resources/Sprites/Weapons_Icons_16x16.png" type="Texture" id=2]
+[ext_resource path="res://resources/Sounds/Explosion 186.wav" type="AudioStream" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 13, 4 )
@@ -25,4 +26,10 @@ texture = ExtResource( 2 )
 vframes = 3
 hframes = 10
 frame = 24
+
+[node name="sfxBroke" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = -10.0
+pitch_scale = 2.0
+bus = "sfx"
 [connection signal="body_entered" from="area2D" to="." method="_on_area2D_body_entered"]
