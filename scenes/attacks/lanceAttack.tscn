@@ -4,7 +4,7 @@
 [ext_resource path="res://resources/Sprites/Weapons_Icons_16x16.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 21.9203, 4.94975 )
+extents = Vector2( 29, 4.94975 )
 
 [node name="lanceAttack" type="Area2D"]
 script = ExtResource( 1 )
