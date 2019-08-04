@@ -132,6 +132,10 @@ corner_radius_bottom_left = 5
 [node name="debug" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+__meta__ = {
+"_edit_horizontal_guides_": [ 50.0, 250.0 ],
+"_edit_vertical_guides_": [ 20.0, 300.0, 80.0, 240.0 ]
+}
 
 [node name="stage" type="StaticBody2D" parent="."]
 z_index = -5
