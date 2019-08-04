@@ -4,6 +4,7 @@
 script/source = "extends Timer
 
 func _ready():
+	self.queue_free()
 	self.wait_time=1/(Engine.get_frames_per_second())
 	get_tree().paused=true
 
