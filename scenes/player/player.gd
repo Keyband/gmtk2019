@@ -195,6 +195,7 @@ func takeDamage(amount):
 			self.pause_mode=Node.PAUSE_MODE_PROCESS
 			get_tree().paused=true
 			$animationPlayer.play("dead")
+			global.lost()
 		elif life<=1:
 			$"hearts/3".frame=1
 			$"hearts/2".frame=1

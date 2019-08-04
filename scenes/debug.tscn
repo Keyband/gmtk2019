@@ -145,19 +145,20 @@ script/source = "extends Control
 var canReset=false
 var waiting=true
 func _ready():
+	global.gameOver=self
 	self.modulate.a=0
 	set_physics_process(true)
 func _physics_process(delta):
-	if global.player.life<=0 and waiting:
-		waiting=false
-		$twnAppear.interpolate_property(self,\"modulate:a\",0,1,1.0,Tween.TRANS_CIRC,Tween.EASE_OUT)
-		$twnAppear.start()
 	if Input.is_action_just_pressed(\"ui_lmb\") and canReset:
 		get_tree().reload_current_scene()
 	
 func _on_twnAppear_tween_completed(object, key):
 	canReset=true
-"
+
+func lost():
+	$twnAppear.interpolate_property(self,\"modulate:a\",0,1,1.0,Tween.TRANS_CIRC,Tween.EASE_OUT)
+	$twnAppear.start()
+	set_physics_process(true)"
 
 [sub_resource type="GDScript" id=15]
 script/source = "extends Label
