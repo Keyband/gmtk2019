@@ -31,11 +31,19 @@ func _on_area2D_body_entered(body):
 		var j=animBroke.instance()
 		j.global_position=$sprite.global_position
 		get_parent().add_child(j)
-		self.queue_free()
 		$sfxBroke.pitch_scale=rand_range(1.8,2.2)
 		$sfxBroke.play()
+		delete()
 	elif body is StaticBody2D:
 		var i=animBroke.instance()
 		i.global_position=$sprite.global_position
 		get_parent().add_child(i)
-		self.queue_free()
+		$sfxBroke.pitch_scale=rand_range(1.8,2.2)
+		$sfxBroke.play()
+		delete()
+
+func delete():
+	self.visible=false
+	$area2D/collisionShape2D.disabled=true
+	yield(get_tree().create_timer(3.0),"timeout")
+	self.queue_free()

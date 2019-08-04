@@ -23,7 +23,7 @@ func _on_twnAttack_tween_completed(object, key):
 		get_parent().get_parent().add_child(i)
 	else:
 		get_parent().changeWeapon("Lance")
-	self.queue_free()
+	delete()
 
 func _on_lanceAttack_body_entered(body):
 	if body.is_in_group("Enemy"):
@@ -34,3 +34,9 @@ func _on_lanceAttack_body_entered(body):
 		get_parent().add_child(i)
 		$sfxBroke.pitch_scale=rand_range(1.8,2.2)
 		$sfxBroke.play()
+		
+func delete():
+	self.visible=false
+	$collisionShape2D.disabled=true
+	yield(get_tree().create_timer(3.0),"timeout")
+	self.queue_free()
