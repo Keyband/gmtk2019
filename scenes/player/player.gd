@@ -53,6 +53,9 @@ func draw_circle_arc_poly(center, radius, angle_from, angle_to, color):
     draw_polygon(points_arc, colors)
 	
 func _physics_process(delta):
+	if Input.is_action_just_pressed("ui_reset"):
+		get_tree().reload_current_scene()
+	
 	update()
 	
 	if invincible:$sprite.visible=!$sprite.visible
@@ -176,20 +179,21 @@ func changeWeapon(weapon):
 	
 func takeDamage(amount):
 	self.life-=amount
+	if not invincible:
+		if life<=0:
+			print("Dead")
+			$"hearts/3".frame=1
+			$"hearts/2".frame=1
+			$"hearts/1".frame=1
+		elif life<=1:
+			$"hearts/3".frame=1
+			$"hearts/2".frame=1
+		elif life<=2:
+			$"hearts/3".frame=1
+		elif life<=3: #???
+			pass
 	$tmrInvulnerability.start()
 	self.invincible=true
-	if life<=0:
-		print("Dead")
-		$"hearts/3".frame=1
-		$"hearts/2".frame=1
-		$"hearts/1".frame=1
-	elif life<=1:
-		$"hearts/3".frame=1
-		$"hearts/2".frame=1
-	elif life<=2:
-		$"hearts/3".frame=1
-	elif life<=3: #???
-		pass
 
 func _on_tmrInvulnerability_timeout():
 	invincible=false
