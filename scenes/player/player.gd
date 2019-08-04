@@ -13,7 +13,8 @@ var speed=175
 const maximumSpeed=175
 var invincible=false
 var anim="idle"
-var hitboxIndicatorProperties={"center":Vector2(),"radius":50,"angleRange":45,"color":Color("#55bd4882")}
+var hitboxIndicatorProperties={"center":Vector2(),"radius":50,"angleRange":45,"color":Color("#00bd4882")}
+var defaultHitboxColor=Color("#55bd4882")
 var lance=preload("res://scenes/attacks/lanceAttack.tscn")
 var axe=preload("res://scenes/attacks/axeAttack.tscn")
 var sword=preload("res://scenes/attacks/swordAttack.tscn")
@@ -125,7 +126,7 @@ func changeWeapon(weapon):
 	if self.currentWeapon=="Nothing" and weapon!="Nothing":# and weapon!="Nothing" or weapon!="Attacking":
 			$sfxPickup.play()
 	self.currentWeapon=weapon
-	var twnDuration=0.3
+	var twnDuration=0.45
 	if self.currentWeapon=="Nothing":
 		weaponWeight=1
 		$twnDraw.interpolate_property(self,"hitboxIndicatorProperties:color",self.hitboxIndicatorProperties['color'],Color("#00bd4882"),twnDuration,Tween.TRANS_CUBIC,Tween.EASE_OUT)
