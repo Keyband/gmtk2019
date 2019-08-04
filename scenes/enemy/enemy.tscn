@@ -31,7 +31,7 @@ anims/animActorWalk = ExtResource( 5 )
 [node name="twnDespawn" type="Tween" parent="."]
 
 [node name="tmrDespawn" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 20.0
 one_shot = true
 
 [node name="spriteShadow" type="Sprite" parent="."]
