@@ -1,11 +1,12 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/enemy/enemy.gd" type="Script" id=1]
 [ext_resource path="res://resources/animActorDead.tres" type="Animation" id=2]
 [ext_resource path="res://resources/animActorEntering.tres" type="Animation" id=3]
 [ext_resource path="res://resources/animActorIdle.tres" type="Animation" id=4]
 [ext_resource path="res://resources/animActorWalk.tres" type="Animation" id=5]
-[ext_resource path="res://resources/Sprites/Enemy_24x24.png" type="Texture" id=6]
+[ext_resource path="res://resources/Sprites/Shadow1.png" type="Texture" id=6]
+[ext_resource path="res://resources/Sprites/Enemy_24x24.png" type="Texture" id=7]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 8, 10 )
@@ -30,8 +31,12 @@ anims/animActorWalk = ExtResource( 5 )
 wait_time = 2.0
 one_shot = true
 
-[node name="sprite" type="Sprite" parent="."]
+[node name="spriteShadow" type="Sprite" parent="."]
+position = Vector2( 0, 12 )
 texture = ExtResource( 6 )
+
+[node name="sprite" type="Sprite" parent="."]
+texture = ExtResource( 7 )
 hframes = 14
 frame = 5
 

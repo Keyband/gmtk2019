@@ -14,12 +14,15 @@ func _ready():
 	self.global_position=Vector2(vectorTargetPosition.x-50,vectorTargetPosition.y-100)
 	var duration=1.5
 	$twnEnter.interpolate_property(self,"global_position:x",self.global_position.x,vectorTargetPosition.x,0.9*duration,Tween.TRANS_LINEAR,Tween.EASE_IN)
-	$twnEnter.interpolate_property(self,"global_position:y",self.global_position.y,vectorTargetPosition.y,duration,Tween.TRANS_BOUNCE,Tween.EASE_OUT)
-#	$twnEnter.interpolate_property($spriteShadow,"position:x",$spriteShadow.position.x,0,0.9*duration,Tween.TRANS_LINEAR,Tween.EASE_IN)
+	$twnEnter.interpolate_property(self,"global_position:y",self.global_position.y,vectorTargetPosition.y-12,duration,Tween.TRANS_BOUNCE,Tween.EASE_OUT)
+	$twnEnter.interpolate_property($spriteShadow,"position:x",$spriteShadow.position.x,0,0.9*duration,Tween.TRANS_LINEAR,Tween.EASE_IN)
 	$twnEnter.start()
 	set_physics_process(true)
 
 func _physics_process(delta):
+	if $twnEnter.is_active(): $spriteShadow.global_position.y=vectorTargetPosition.y
+	else: $spriteShadow.position.y=12
+	
 	if state=="Alive":
 		#Add some lerping to this movement maybe?
 		if $animationPlayer.name!=anim:$animationPlayer.play(anim)
@@ -60,4 +63,5 @@ func _on_tmrDespawn_timeout():
 func _on_twnDespawn_tween_completed(object, key):
 	self.queue_free()
 
-func _on_twnEnter_tween_completed(object, key):self.state="Alive"
+func _on_twnEnter_tween_completed(object, key):
+	self.state="Alive"

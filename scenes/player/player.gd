@@ -158,7 +158,7 @@ func changeWeapon(weapon):
 		weaponWeight=1
 		$twnDraw.interpolate_property(self,"hitboxIndicatorProperties:color",self.hitboxIndicatorProperties['color'],Color("#aabd4882"),twnDuration,Tween.TRANS_CUBIC,Tween.EASE_OUT)
 		$twnDraw.interpolate_property(self,"hitboxIndicatorProperties:radius",self.hitboxIndicatorProperties['radius'],300,twnDuration,Tween.TRANS_CUBIC,Tween.EASE_OUT)
-		$twnDraw.interpolate_property(self,"hitboxIndicatorProperties:angleRange",self.hitboxIndicatorProperties['angleRange'],2,twnDuration,Tween.TRANS_CUBIC,Tween.EASE_OUT)
+		$twnDraw.interpolate_property(self,"hitboxIndicatorProperties:angleRange",self.hitboxIndicatorProperties['angleRange'],0.5,twnDuration,Tween.TRANS_CUBIC,Tween.EASE_OUT)
 		$twnDraw.start()
 	elif self.currentWeapon=="MorningStar":
 		$sfxPickup.play()
