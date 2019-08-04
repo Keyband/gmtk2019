@@ -13,7 +13,7 @@ var speed=175
 const maximumSpeed=175
 
 var anim="idle"
-
+var hitboxIndicatorProperties={"center":Vector2(),"radius":50,"angleRange":45,"color":Color("#aabd4882")}
 var lance=preload("res://scenes/attacks/lanceAttack.tscn")
 var axe=preload("res://scenes/attacks/axeAttack.tscn")
 var sword=preload("res://scenes/attacks/swordAttack.tscn")
@@ -28,7 +28,16 @@ func _ready():
 	
 func _draw():
 	var angleDeg=rad2deg((get_global_mouse_position()-self.global_position).angle())+90
-	draw_circle_arc_poly(Vector2(),50,-45+angleDeg,45+angleDeg,Color("#ffffff"))
+#	draw_circle_arc_poly(hitboxIndicatorProperties["center"],
+#						1.1*hitboxIndicatorProperties["radius"],
+#						-1.1*hitboxIndicatorProperties["angleRange"]+angleDeg,
+#						1.1*hitboxIndicatorProperties["angleRange"]+angleDeg,
+#						Color("#aa000000"))
+	draw_circle_arc_poly(hitboxIndicatorProperties["center"],
+						hitboxIndicatorProperties["radius"],
+						-hitboxIndicatorProperties["angleRange"]+angleDeg,
+						hitboxIndicatorProperties["angleRange"]+angleDeg,
+						hitboxIndicatorProperties["color"])
 	
 func draw_circle_arc_poly(center, radius, angle_from, angle_to, color):
 	#Yeah, this is a shameless copypaste from here: http://docs.godotengine.org/en/latest/tutorials/2d/custom_drawing_in_2d.html
@@ -44,6 +53,7 @@ func draw_circle_arc_poly(center, radius, angle_from, angle_to, color):
 	
 func _physics_process(delta):
 	update()
+	
 	if life<=0:print("u ded")
 	
 	if $animationPlayer.name!=anim:$animationPlayer.play(anim)
@@ -110,14 +120,47 @@ func _physics_process(delta):
 
 func changeWeapon(weapon):
 	self.currentWeapon=weapon
-	
-	if self.currentWeapon=="Nothing":weaponWeight=1
-	elif self.currentWeapon=="Lance":weaponWeight=3
-	elif self.currentWeapon=="Axe":weaponWeight=5
-	elif self.currentWeapon=="Sword":weaponWeight=2
-	elif self.currentWeapon=="Katana":weaponWeight=3
-	elif self.currentWeapon=="Dagger":weaponWeight=1
-	elif self.currentWeapon=="MorningStar":weaponWeight=5
+	var twnDuration=0.3
+	if self.currentWeapon=="Nothing":
+		weaponWeight=1
+		$twnDraw.interpolate_property(self,"hitboxIndicatorProperties:color",self.hitboxIndicatorProperties['color'],Color("#00bd4882"),twnDuration,Tween.TRANS_CUBIC,Tween.EASE_OUT)
+		$twnDraw.start()
+	elif self.currentWeapon=="Lance":
+		weaponWeight=3
+		$twnDraw.interpolate_property(self,"hitboxIndicatorProperties:color",self.hitboxIndicatorProperties['color'],Color("#aabd4882"),twnDuration,Tween.TRANS_CUBIC,Tween.EASE_OUT)
+		$twnDraw.interpolate_property(self,"hitboxIndicatorProperties:radius",self.hitboxIndicatorProperties['radius'],75,twnDuration,Tween.TRANS_CUBIC,Tween.EASE_OUT)
+		$twnDraw.interpolate_property(self,"hitboxIndicatorProperties:angleRange",self.hitboxIndicatorProperties['angleRange'],15,twnDuration,Tween.TRANS_CUBIC,Tween.EASE_OUT)
+		$twnDraw.start()
+	elif self.currentWeapon=="Axe":
+		weaponWeight=5
+		$twnDraw.interpolate_property(self,"hitboxIndicatorProperties:color",self.hitboxIndicatorProperties['color'],Color("#aabd4882"),twnDuration,Tween.TRANS_CUBIC,Tween.EASE_OUT)
+		$twnDraw.interpolate_property(self,"hitboxIndicatorProperties:radius",self.hitboxIndicatorProperties['radius'],50,twnDuration,Tween.TRANS_CUBIC,Tween.EASE_OUT)
+		$twnDraw.interpolate_property(self,"hitboxIndicatorProperties:angleRange",self.hitboxIndicatorProperties['angleRange'],60,twnDuration,Tween.TRANS_CUBIC,Tween.EASE_OUT)
+		$twnDraw.start()
+	elif self.currentWeapon=="Sword":
+		$twnDraw.interpolate_property(self,"hitboxIndicatorProperties:color",self.hitboxIndicatorProperties['color'],Color("#aabd4882"),twnDuration,Tween.TRANS_CUBIC,Tween.EASE_OUT)
+		$twnDraw.interpolate_property(self,"hitboxIndicatorProperties:radius",self.hitboxIndicatorProperties['radius'],50,twnDuration,Tween.TRANS_CUBIC,Tween.EASE_OUT)
+		$twnDraw.interpolate_property(self,"hitboxIndicatorProperties:angleRange",self.hitboxIndicatorProperties['angleRange'],45,twnDuration,Tween.TRANS_CUBIC,Tween.EASE_OUT)
+		$twnDraw.start()
+		weaponWeight=2
+	elif self.currentWeapon=="Katana":
+		$twnDraw.interpolate_property(self,"hitboxIndicatorProperties:color",self.hitboxIndicatorProperties['color'],Color("#aabd4882"),twnDuration,Tween.TRANS_CUBIC,Tween.EASE_OUT)
+		$twnDraw.interpolate_property(self,"hitboxIndicatorProperties:radius",self.hitboxIndicatorProperties['radius'],75,twnDuration,Tween.TRANS_CUBIC,Tween.EASE_OUT)
+		$twnDraw.interpolate_property(self,"hitboxIndicatorProperties:angleRange",self.hitboxIndicatorProperties['angleRange'],45,twnDuration,Tween.TRANS_CUBIC,Tween.EASE_OUT)
+		$twnDraw.start()
+		weaponWeight=3
+	elif self.currentWeapon=="Dagger":
+		$twnDraw.interpolate_property(self,"hitboxIndicatorProperties:color",self.hitboxIndicatorProperties['color'],Color("#aabd4882"),twnDuration,Tween.TRANS_CUBIC,Tween.EASE_OUT)
+		$twnDraw.interpolate_property(self,"hitboxIndicatorProperties:radius",self.hitboxIndicatorProperties['radius'],300,twnDuration,Tween.TRANS_CUBIC,Tween.EASE_OUT)
+		$twnDraw.interpolate_property(self,"hitboxIndicatorProperties:angleRange",self.hitboxIndicatorProperties['angleRange'],2,twnDuration,Tween.TRANS_CUBIC,Tween.EASE_OUT)
+		$twnDraw.start()
+		weaponWeight=1
+	elif self.currentWeapon=="MorningStar":
+		$twnDraw.interpolate_property(self,"hitboxIndicatorProperties:color",self.hitboxIndicatorProperties['color'],Color("#aabd4882"),twnDuration,Tween.TRANS_CUBIC,Tween.EASE_OUT)
+		$twnDraw.interpolate_property(self,"hitboxIndicatorProperties:radius",self.hitboxIndicatorProperties['radius'],50,twnDuration,Tween.TRANS_CUBIC,Tween.EASE_OUT)
+		$twnDraw.interpolate_property(self,"hitboxIndicatorProperties:angleRange",self.hitboxIndicatorProperties['angleRange'],180,twnDuration,Tween.TRANS_CUBIC,Tween.EASE_OUT)
+		$twnDraw.start()
+		weaponWeight=5
 	
 func takeDamage(amount):
 	self.life-=amount

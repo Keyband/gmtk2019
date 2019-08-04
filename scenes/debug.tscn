@@ -5,10 +5,10 @@
 [ext_resource path="res://scenes/weaponSpawner/weaponSpawner.gd" type="Script" id=3]
 [ext_resource path="res://scenes/enemySpawner/enemySpawner.gd" type="Script" id=4]
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=5]
-[ext_resource path="res://resources/Sprites/Hearts_9x8.png" type="Texture" id=6]
-[ext_resource path="res://resources/animActorDead.tres" type="Animation" id=7]
-[ext_resource path="res://resources/animActorIdle.tres" type="Animation" id=8]
-[ext_resource path="res://resources/animActorWalk.tres" type="Animation" id=9]
+[ext_resource path="res://resources/animActorDead.tres" type="Animation" id=6]
+[ext_resource path="res://resources/animActorIdle.tres" type="Animation" id=7]
+[ext_resource path="res://resources/animActorWalk.tres" type="Animation" id=8]
+[ext_resource path="res://resources/Sprites/Hearts_9x8.png" type="Texture" id=9]
 [ext_resource path="res://resources/Sprites/Weapons_Icons_16x16.png" type="Texture" id=10]
 [ext_resource path="res://resources/Sprites/char_24x24.png" type="Texture" id=11]
 [ext_resource path="res://icon.png" type="Texture" id=12]
@@ -80,6 +80,8 @@ anchor_bottom = 1.0
 
 [node name="stage" type="StaticBody2D" parent="."]
 z_index = -5
+collision_layer = 7
+collision_mask = 7
 
 [node name="sprite" type="Sprite" parent="stage"]
 position = Vector2( 160, 152 )
@@ -126,9 +128,17 @@ script = ExtResource( 4 )
 autostart = true
 
 [node name="player" type="KinematicBody2D" parent="Node2D"]
-editor/display_folded = true
 position = Vector2( 176, 174 )
 script = ExtResource( 5 )
+
+[node name="animationPlayer" type="AnimationPlayer" parent="Node2D/player"]
+autoplay = "idle"
+anims/dead = ExtResource( 6 )
+anims/idle = ExtResource( 7 )
+anims/walk = SubResource( 3 )
+anims/walkWithWeapon = ExtResource( 8 )
+
+[node name="twnDraw" type="Tween" parent="Node2D/player"]
 
 [node name="hearts" type="Node2D" parent="Node2D/player"]
 editor/display_folded = true
@@ -137,25 +147,18 @@ z_as_relative = false
 
 [node name="1" type="Sprite" parent="Node2D/player/hearts"]
 position = Vector2( -10, -15 )
-texture = ExtResource( 6 )
+texture = ExtResource( 9 )
 hframes = 2
 
 [node name="2" type="Sprite" parent="Node2D/player/hearts"]
 position = Vector2( 0, -15 )
-texture = ExtResource( 6 )
+texture = ExtResource( 9 )
 hframes = 2
 
 [node name="3" type="Sprite" parent="Node2D/player/hearts"]
 position = Vector2( 10, -15 )
-texture = ExtResource( 6 )
+texture = ExtResource( 9 )
 hframes = 2
-
-[node name="animationPlayer" type="AnimationPlayer" parent="Node2D/player"]
-autoplay = "idle"
-anims/dead = ExtResource( 7 )
-anims/idle = ExtResource( 8 )
-anims/walk = SubResource( 3 )
-anims/walkWithWeapon = ExtResource( 9 )
 
 [node name="spriteWeapon" type="Sprite" parent="Node2D/player"]
 editor/display_folded = true
