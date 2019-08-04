@@ -28,6 +28,15 @@ func _ready():
 	elif index==5:$sprite.frame=5
 	$sprite.rotation=rand_range(-PI/5,PI/5)
 	$spriteShadow.rotation=$sprite.rotation
+	
+	var xx=-400 if randi()%2==0 else 400
+	var vectorInitialPosition=Vector2(xx,rand_range(20,320-20))
+	$sprite.global_position.x=vectorInitialPosition
+	$spriteShadow.global_position.x=vectorInitialPosition
+	$twnEnter.interpolate_property($sprite,"position:x",$sprite.position,0,1.0,Tween.TRANS_LINEAR)
+	$twnEnter.interpolate_property($spriteShadow,"position:x",$spriteShadow.position,0,1.0,Tween.TRANS_LINEAR)
+	$twnEnter.start()
+	$sprite
 
 func _on_weaponLance_body_entered(body):
 	if body.is_in_group("Player"):
