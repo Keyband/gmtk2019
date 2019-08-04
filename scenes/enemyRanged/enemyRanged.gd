@@ -4,7 +4,7 @@ var life=1
 var state="Entering"
 var knockback=0
 var vectorKnockback=Vector2()
-const speed=75
+const speed=50
 var particle=preload("res://scenes/genericParticle/particle.tscn")
 var dagger=preload("res://scenes/enemyRanged/enemyDaggerAttack.tscn")
 var canAttack=true
@@ -16,14 +16,16 @@ func _ready():
 	var duration=1.5
 	$twnEnter.interpolate_property(self,"global_position:x",self.global_position.x,vectorTargetPosition.x,0.9*duration,Tween.TRANS_LINEAR,Tween.EASE_IN)
 	$twnEnter.interpolate_property(self,"global_position:y",self.global_position.y,vectorTargetPosition.y,duration,Tween.TRANS_BOUNCE,Tween.EASE_OUT)
-#	$twnEnter.interpolate_property($spriteShadow,"position:x",$spriteShadow.position.x,0,0.9*duration,Tween.TRANS_LINEAR,Tween.EASE_IN)
+	$twnEnter.interpolate_property($spriteShadow,"position:x",$spriteShadow.position.x,0,0.9*duration,Tween.TRANS_LINEAR,Tween.EASE_IN)
 	$twnEnter.start()
 	set_physics_process(true)
 
 func _physics_process(delta):
+	if $twnEnter.is_active(): $spriteShadow.global_position.y=vectorTargetPosition.y
+	else: $spriteShadow.position.y=12
 	if state=="Alive":
 		var vectorDistanceToPlayer=global.player.global_position-self.global_position
-		if vectorDistanceToPlayer.length()>200:
+		if vectorDistanceToPlayer.length()>50:
 			if $animationPlayer.name!=anim:$animationPlayer.play(anim)
 			var vectorMovement=move_and_slide((global.player.global_position-self.global_position).normalized()*speed)
 			$sprite.flip_h=true if vectorMovement.x<0 else false if vectorMovement.x>0 else $sprite.flip_h
@@ -31,7 +33,7 @@ func _physics_process(delta):
 #			if $animationPlayer.name!=anim:$animationPlayer.play(anim)
 #			move_and_slide(vectorDistanceToPlayer.normalized()*speed)
 #			anim="animActorIdle" if vectorMovement==Vector2() else "animActorWalk"
-		elif vectorDistanceToPlayer.length()<150:
+		elif vectorDistanceToPlayer.length()<75:
 			if $animationPlayer.name!=anim:$animationPlayer.play(anim)
 			var vectorMovement=move_and_slide(-(global.player.global_position-self.global_position).normalized()*speed)
 			$sprite.flip_h=true if vectorMovement.x<0 else false if vectorMovement.x>0 else $sprite.flip_h
@@ -77,7 +79,7 @@ func _on_twnDespawn_tween_completed(object, key):
 func attack():
 	var vectorDistanceToPlayer=global.player.global_position-self.global_position
 	if canAttack:
-		if vectorDistanceToPlayer.length()<200 and vectorDistanceToPlayer.length()>150:
+		if vectorDistanceToPlayer.length()<75 and vectorDistanceToPlayer.length()>50:
 			var i=dagger.instance()
 			i.global_position=self.global_position
 			i.vectorDirection=vectorDistanceToPlayer.normalized()
@@ -90,4 +92,5 @@ func _on_tmrAttack_timeout():
 	canAttack=true
 
 
-func _on_twnEnter_tween_completed(object, key):self.state="Alive"
+func _on_twnEnter_tween_completed(object, key):
+	if self.state!="Dead":self.state="Alive"

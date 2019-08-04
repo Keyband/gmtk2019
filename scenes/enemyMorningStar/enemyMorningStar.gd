@@ -74,14 +74,15 @@ func _on_twnDespawn_tween_completed(object, key):
 
 #func _on_twnEnter_tween_completed(object, key):
 func _on_twnEnter_tween_all_completed():
-	self.state="Alive"
-	var duration=3
-	for node in $area2D/collisionShape2D.get_children():
-		var target=node.position.x
-		$twnChain.interpolate_property(node,"position:x",-53,target,duration,Tween.TRANS_QUINT,Tween.EASE_OUT)
-	$twnChain.interpolate_property(self,"rotationSpeed",0,1.5*PI,0.75*duration,Tween.TRANS_QUINT,Tween.EASE_OUT)
-	$twnChain.start()
-	$area2D.visible=true
+	if self.state!="Dead":
+		self.state="Alive"
+		var duration=3
+		for node in $area2D/collisionShape2D.get_children():
+			var target=node.position.x
+			$twnChain.interpolate_property(node,"position:x",-53,target,duration,Tween.TRANS_QUINT,Tween.EASE_OUT)
+		$twnChain.interpolate_property(self,"rotationSpeed",0,1.5*PI,0.75*duration,Tween.TRANS_QUINT,Tween.EASE_OUT)
+		$twnChain.start()
+		$area2D.visible=true
 
 func _on_area2D_body_entered(body):
 	if body.is_in_group("Player"):

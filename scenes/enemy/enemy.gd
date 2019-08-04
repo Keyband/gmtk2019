@@ -65,4 +65,8 @@ func _on_twnDespawn_tween_completed(object, key):
 	self.queue_free()
 
 func _on_twnEnter_tween_completed(object, key):
-	self.state="Alive"
+	if self.state!="Dead":self.state="Alive"
+
+func _on_area2D_body_entered(body):
+	if body.is_in_group("Player"):
+		body.takeDamage(1)

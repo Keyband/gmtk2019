@@ -186,6 +186,9 @@ func takeDamage(amount):
 			$"hearts/3".frame=1
 			$"hearts/2".frame=1
 			$"hearts/1".frame=1
+			set_physics_process(false)
+			self.pause_mode=Node.PAUSE_MODE_PROCESS
+			$animationPlayer.play("dead")
 		elif life<=1:
 			$"hearts/3".frame=1
 			$"hearts/2".frame=1
