@@ -69,5 +69,5 @@ func _on_twnEnter_tween_completed(object, key):
 	if self.state!="Dead":self.state="Alive"
 
 func _on_area2D_body_entered(body):
-	if body.is_in_group("Player"):
+	if body.is_in_group("Player") and self.life>0:
 		body.takeDamage(1)
