@@ -324,13 +324,9 @@ stream = ExtResource( 13 )
 pitch_scale = 0.8
 bus = "sfx"
 
-[node name="sfxBroke" type="AudioStreamPlayer" parent="Node2D/player"]
-stream = ExtResource( 14 )
-pitch_scale = 2.0
-bus = "sfx"
-
 [node name="sfxHurt" type="AudioStreamPlayer" parent="Node2D/player"]
 stream = ExtResource( 14 )
+volume_db = -2.0
 pitch_scale = 2.0
 bus = "sfx"
 

@@ -130,6 +130,7 @@ func _physics_process(delta):
 
 func changeWeapon(weapon):
 	if self.currentWeapon=="Nothing" and weapon!="Nothing":# and weapon!="Nothing" or weapon!="Attacking":
+			$sfxPickup.pitch_scale=rand_range(0.7,0.9)
 			$sfxPickup.play()
 	self.currentWeapon=weapon
 	var twnDuration=0.45
@@ -182,6 +183,8 @@ func changeWeapon(weapon):
 	
 func takeDamage(amount):
 	self.life-=amount
+	$sfxHurt.pitch_scale=rand_range(1.8,2.2)
+	$sfxHurt.play()
 	if not invincible:
 		if life<=0:
 			print("Dead")
