@@ -22,11 +22,13 @@ func _ready():
 	#TODO:Add some rotation when the weapon is landing
 	randomize()
 	var index=randi()%types.size()
+	while index==3:
+		index=randi()%types.size()
 	self.type=types[index]
 	if index==0:$sprite.frame=1
 	elif index==1:$sprite.frame=2
 	elif index==2:$sprite.frame=0
-	elif index==3:$sprite.frame=3
+#	elif index==3:$sprite.frame=3
 	elif index==4:$sprite.frame=4
 	elif index==5:$sprite.frame=5
 #	$sprite.rotation=rand_range(-PI/5,PI/5)
