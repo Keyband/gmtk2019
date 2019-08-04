@@ -5,14 +5,15 @@
 [ext_resource path="res://resources/animActorEntering.tres" type="Animation" id=3]
 [ext_resource path="res://resources/animActorIdle.tres" type="Animation" id=4]
 [ext_resource path="res://resources/animActorWalk.tres" type="Animation" id=5]
-[ext_resource path="res://resources/Sprites/Shadow1.png" type="Texture" id=6]
-[ext_resource path="res://resources/Sprites/Enemy3_24x25.png" type="Texture" id=7]
-[ext_resource path="res://icon.png" type="Texture" id=8]
+[ext_resource path="res://resources/Sprites/Weapons_Icons_16x16.png" type="Texture" id=6]
+[ext_resource path="res://resources/Sprites/Shadow1.png" type="Texture" id=7]
+[ext_resource path="res://resources/Sprites/Enemy3_24x25.png" type="Texture" id=8]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 6, 7 )
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6, 10 )
-
-[sub_resource type="RectangleShape2D" id=2]
 
 [node name="enemyMorningStar" type="KinematicBody2D"]
 script = ExtResource( 1 )
@@ -29,33 +30,86 @@ anims/animActorWalk = ExtResource( 5 )
 
 [node name="twnDespawn" type="Tween" parent="."]
 
+[node name="area2D" type="Area2D" parent="."]
+position = Vector2( 5, 4 )
+
+[node name="collisionShape2D" type="CollisionShape2D" parent="area2D"]
+position = Vector2( 58, 0 )
+shape = SubResource( 2 )
+
+[node name="1" type="Sprite" parent="area2D/collisionShape2D"]
+position = Vector2( -53, 0 )
+texture = ExtResource( 6 )
+vframes = 3
+hframes = 10
+frame = 29
+
+[node name="2" type="Sprite" parent="area2D/collisionShape2D"]
+position = Vector2( -45, 0 )
+texture = ExtResource( 6 )
+vframes = 3
+hframes = 10
+frame = 29
+
+[node name="3" type="Sprite" parent="area2D/collisionShape2D"]
+position = Vector2( -37, 0 )
+texture = ExtResource( 6 )
+vframes = 3
+hframes = 10
+frame = 29
+
+[node name="4" type="Sprite" parent="area2D/collisionShape2D"]
+position = Vector2( -29, 0 )
+texture = ExtResource( 6 )
+vframes = 3
+hframes = 10
+frame = 29
+
+[node name="5" type="Sprite" parent="area2D/collisionShape2D"]
+position = Vector2( -21, 0 )
+texture = ExtResource( 6 )
+vframes = 3
+hframes = 10
+frame = 29
+
+[node name="6" type="Sprite" parent="area2D/collisionShape2D"]
+position = Vector2( -13, 0 )
+texture = ExtResource( 6 )
+vframes = 3
+hframes = 10
+frame = 29
+
+[node name="7" type="Sprite" parent="area2D/collisionShape2D"]
+position = Vector2( -5, 0 )
+texture = ExtResource( 6 )
+vframes = 3
+hframes = 10
+frame = 29
+
+[node name="sprite" type="Sprite" parent="area2D/collisionShape2D"]
+position = Vector2( 1, 0 )
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 6 )
+vframes = 3
+hframes = 10
+frame = 28
+
 [node name="tmrDespawn" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
 
 [node name="spriteShadow" type="Sprite" parent="."]
 position = Vector2( 0, 12 )
-texture = ExtResource( 6 )
+texture = ExtResource( 7 )
 
 [node name="sprite" type="Sprite" parent="."]
-texture = ExtResource( 7 )
+texture = ExtResource( 8 )
 vframes = 2
 hframes = 14
 frame = 8
 
 [node name="collisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
-
-[node name="area2D" type="Area2D" parent="."]
-
-[node name="collisionShape2D" type="CollisionShape2D" parent="area2D"]
-position = Vector2( 63, 0 )
-shape = SubResource( 2 )
-
-[node name="sprite" type="Sprite" parent="area2D/collisionShape2D"]
-position = Vector2( 9.53674e-07, -9.53674e-07 )
-scale = Vector2( 0.3125, 0.3125 )
-texture = ExtResource( 8 )
 [connection signal="tween_completed" from="twnEnter" to="." method="_on_twnEnter_tween_completed"]
 [connection signal="tween_completed" from="twnDespawn" to="." method="_on_twnDespawn_tween_completed"]
 [connection signal="timeout" from="tmrDespawn" to="." method="_on_tmrDespawn_timeout"]
