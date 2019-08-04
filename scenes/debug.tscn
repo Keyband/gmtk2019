@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://resources/Sprites/Stage.png" type="Texture" id=1]
 [ext_resource path="res://scenes/camera/camera2D.gd" type="Script" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://resources/Sprites/Weapons_Icons_16x16.png" type="Texture" id=10]
 [ext_resource path="res://resources/Sprites/char_24x24.png" type="Texture" id=11]
 [ext_resource path="res://icon.png" type="Texture" id=12]
+[ext_resource path="res://scenes/weaponIndicator/weaponIndicator.gd" type="Script" id=13]
 
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 10, 160 )
@@ -74,11 +75,19 @@ func _physics_process(delta):
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6.00006, 9 )
 
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0.0941176, 0.0941176, 0.0941176, 1 )
+border_width_left = 1
+border_width_top = 2
+border_width_bottom = 1
+border_color = Color( 0.117647, 0.117647, 0.117647, 1 )
+
 [node name="debug" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="stage" type="StaticBody2D" parent="."]
+z_index = -5
 
 [node name="sprite" type="Sprite" parent="stage"]
 position = Vector2( 160, 152 )
@@ -207,6 +216,58 @@ position = Vector2( 6.10352e-05, 0.999969 )
 shape = SubResource( 1 )
 
 [node name="del2" type="Node2D" parent="Node2D/player"]
+
+[node name="control" type="Control" parent="."]
+margin_left = 1.0
+margin_top = 281.0
+margin_right = 320.0
+margin_bottom = 321.0
+
+[node name="panelContainer" type="PanelContainer" parent="control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 7 )
+
+[node name="hBoxContainer" type="HBoxContainer" parent="control/panelContainer"]
+margin_left = 1.0
+margin_top = 2.0
+margin_right = 319.0
+margin_bottom = 39.0
+
+[node name="l" type="Control" parent="control/panelContainer/hBoxContainer"]
+margin_right = 103.0
+margin_bottom = 37.0
+size_flags_horizontal = 3
+
+[node name="m" type="Control" parent="control/panelContainer/hBoxContainer"]
+margin_left = 107.0
+margin_right = 210.0
+margin_bottom = 37.0
+size_flags_horizontal = 3
+
+[node name="weaponIndicator" type="Node2D" parent="control/panelContainer/hBoxContainer/m"]
+position = Vector2( 51, 18 )
+script = ExtResource( 13 )
+
+[node name="twnPosition" type="Tween" parent="control/panelContainer/hBoxContainer/m/weaponIndicator"]
+
+[node name="sprite" type="Sprite" parent="control/panelContainer/hBoxContainer/m/weaponIndicator"]
+position = Vector2( 0, 51 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 10 )
+vframes = 3
+hframes = 10
+
+[node name="positionIn" type="Position2D" parent="control/panelContainer/hBoxContainer/m/weaponIndicator"]
+
+[node name="positionOut" type="Position2D" parent="control/panelContainer/hBoxContainer/m/weaponIndicator"]
+position = Vector2( 0, 51 )
+
+[node name="r" type="Control" parent="control/panelContainer/hBoxContainer"]
+margin_left = 214.0
+margin_right = 318.0
+margin_bottom = 37.0
+size_flags_horizontal = 3
 [connection signal="tween_completed" from="camera2D/twnShake" to="camera2D" method="_on_twnShake_tween_completed"]
 [connection signal="timeout" from="Node2D/weaponSpawner/timer" to="Node2D/weaponSpawner" method="_on_timer_timeout"]
 [connection signal="timeout" from="Node2D/enemySpawner/timer" to="Node2D/enemySpawner" method="_on_timer_timeout"]
