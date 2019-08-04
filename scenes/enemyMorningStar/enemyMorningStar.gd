@@ -4,7 +4,7 @@ var life=2
 var state="Entering"
 var knockback=0
 var vectorKnockback=Vector2()
-const speed=30
+const speed=20
 var particle=preload("res://scenes/genericParticle/particle.tscn")
 var anim="animActorIdle"
 var vectorTargetPosition=Vector2()
@@ -17,6 +17,7 @@ func _ready():
 	$twnEnter.interpolate_property(self,"global_position:y",self.global_position.y,vectorTargetPosition.y-12,duration,Tween.TRANS_BOUNCE,Tween.EASE_OUT)
 	$twnEnter.interpolate_property($spriteShadow,"position:x",$spriteShadow.position.x,0,0.9*duration,Tween.TRANS_LINEAR,Tween.EASE_IN)
 	$twnEnter.start()
+	$area2D.visible=false
 	set_physics_process(true)
 
 func _physics_process(delta):
@@ -26,7 +27,7 @@ func _physics_process(delta):
 	
 	if state=="Alive":
 		#Add some lerping to this movement maybe?
-		rotationSpeed=lerp(rotationSpeed,1.5*PI,0.15)
+#		rotationSpeed=lerp(rotationSpeed,1.5*PI,0.15)
 		if $animationPlayer.name!=anim:$animationPlayer.play(anim)
 		knockback=lerp(knockback,0,0.1)
 		var vectorMovement=move_and_slide((global.player.global_position-self.global_position).normalized()*speed+knockback*vectorKnockback)
@@ -71,6 +72,23 @@ func _on_tmrDespawn_timeout():
 func _on_twnDespawn_tween_completed(object, key):
 	self.queue_free()
 
-func _on_twnEnter_tween_completed(object, key):
+#func _on_twnEnter_tween_completed(object, key):
+func _on_twnEnter_tween_all_completed():
 	self.state="Alive"
+	var duration=3
+	for node in $area2D/collisionShape2D.get_children():
+		var target=node.position.x
+		print(target)
+		$twnChain.interpolate_property(node,"position:x",-53,target,duration,Tween.TRANS_QUINT,Tween.EASE_OUT)
+	$twnChain.interpolate_property(self,"rotationSpeed",0,1.5*PI,0.75*duration,Tween.TRANS_QUINT,Tween.EASE_OUT)
+	$twnChain.start()
+	$area2D.visible=true
+
+
+
+func _on_twnChain_tween_all_completed():
+	print("@@@@@@@@@@@@@@@@@@")
+	pass # Replace with function body.
+
+
 

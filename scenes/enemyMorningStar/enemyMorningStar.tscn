@@ -30,6 +30,8 @@ anims/animActorWalk = ExtResource( 5 )
 
 [node name="twnDespawn" type="Tween" parent="."]
 
+[node name="twnChain" type="Tween" parent="."]
+
 [node name="area2D" type="Area2D" parent="."]
 position = Vector2( 5, 4 )
 
@@ -110,6 +112,7 @@ frame = 8
 
 [node name="collisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )
-[connection signal="tween_completed" from="twnEnter" to="." method="_on_twnEnter_tween_completed"]
+[connection signal="tween_all_completed" from="twnEnter" to="." method="_on_twnEnter_tween_all_completed"]
 [connection signal="tween_completed" from="twnDespawn" to="." method="_on_twnDespawn_tween_completed"]
+[connection signal="tween_all_completed" from="twnChain" to="." method="_on_twnChain_tween_all_completed"]
 [connection signal="timeout" from="tmrDespawn" to="." method="_on_tmrDespawn_timeout"]
