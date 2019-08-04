@@ -56,6 +56,8 @@ func draw_circle_arc_poly(center, radius, angle_from, angle_to, color):
 func _physics_process(delta):
 	if Input.is_action_just_pressed("ui_reset"):
 		get_tree().reload_current_scene()
+	if Input.is_action_just_pressed("ui_mute"):
+		AudioServer.set_bus_mute(AudioServer.get_bus_index("Master"),!AudioServer.is_bus_mute(AudioServer.get_bus_index("Master")))
 	
 	update()
 	
