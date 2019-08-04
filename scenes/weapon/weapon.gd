@@ -17,6 +17,7 @@ var types=[
 #-Steel ball: projétil com hitbox e splash damage
 
 func _ready():
+	#TODO:Add some rotation when the weapon is landing
 	randomize()
 	var index=randi()%types.size()
 	self.type=types[index]
@@ -29,14 +30,18 @@ func _ready():
 	$sprite.rotation=rand_range(-PI/5,PI/5)
 	$spriteShadow.rotation=$sprite.rotation
 	
-	var xx=-400 if randi()%2==0 else 400
+	var xx=-200 if self.global_position.x<160 else 200#-400 if randi()%2==0 else 400
 	var vectorInitialPosition=Vector2(xx,rand_range(20,320-20))
-	$sprite.global_position.x=vectorInitialPosition
-	$spriteShadow.global_position.x=vectorInitialPosition
-	$twnEnter.interpolate_property($sprite,"position:x",$sprite.position,0,1.0,Tween.TRANS_LINEAR)
-	$twnEnter.interpolate_property($spriteShadow,"position:x",$spriteShadow.position,0,1.0,Tween.TRANS_LINEAR)
+	$sprite.global_position.x=vectorInitialPosition.x
+	$sprite.position.y=-100
+	$spriteShadow.global_position.x=vectorInitialPosition.x
+	$spriteShadow.frame=$sprite.frame
+	var duration=1.5
+	$twnEnter.interpolate_property($sprite,"position:x",$sprite.position.x,0,0.9*duration,Tween.TRANS_LINEAR,Tween.EASE_IN)
+	$twnEnter.interpolate_property($sprite,"position:y",$sprite.position.y,0,duration,Tween.TRANS_BOUNCE,Tween.EASE_OUT)
+	$twnEnter.interpolate_property($spriteShadow,"position:x",$spriteShadow.position.x,0,0.9*duration,Tween.TRANS_LINEAR,Tween.EASE_IN)
 	$twnEnter.start()
-	$sprite
+#	$sprite
 
 func _on_weaponLance_body_entered(body):
 	if body.is_in_group("Player"):

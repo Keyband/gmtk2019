@@ -4,7 +4,7 @@ var life=1
 var state="Alive"
 var knockback=0
 var vectorKnockback=Vector2()
-const speed=85
+const speed=65
 var particle=preload("res://scenes/genericParticle/particle.tscn")
 var anim="animActorIdle"
 
