@@ -64,7 +64,7 @@ func _physics_process(delta):
 	if invincible:$sprite.visible=!$sprite.visible
 	else: $sprite.visible=true
 	
-	if life<=0:print("u ded")
+#	if life<=0:print("u ded")
 	
 	if $animationPlayer.name!=anim:$animationPlayer.play(anim)
 	

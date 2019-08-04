@@ -17,6 +17,7 @@ _global_script_class_icons={
 
 config/name="Jank Warrior"
 run/main_scene="res://scenes/debug.tscn"
+boot_splash/image="res://resources/Sprites/thefuggingsplash.png"
 config/icon="res://icon.png"
 
 [autoload]
