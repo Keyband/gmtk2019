@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://resources/Sprites/Stage.png" type="Texture" id=1]
 [ext_resource path="res://scenes/camera/camera2D.gd" type="Script" id=2]
@@ -14,14 +14,13 @@
 [ext_resource path="res://icon.png" type="Texture" id=12]
 [ext_resource path="res://scenes/weaponIndicator/weaponIndicator.gd" type="Script" id=13]
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 10, 160 )
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 160, 10 )
 
-[sub_resource type="Animation" id=2]
-resource_name = "walk"
+[sub_resource type="Animation" id=3]
 length = 0.8
 loop = true
 tracks/0/type = "value"
@@ -37,7 +36,7 @@ tracks/0/keys = {
 "values": [ 2, 3, 4, 5, 6, 7, 8, 9 ]
 }
 
-[sub_resource type="GDScript" id=3]
+[sub_resource type="GDScript" id=4]
 script/source = "extends Sprite
 func _ready():
 	self.queue_free()
@@ -55,7 +54,7 @@ func _physics_process(delta):
 	self.visible=true if not get_parent().currentWeapon in [\"Nothing\",\"Attacking\"] else false
 	self.rotation=(get_global_mouse_position()-self.global_position).angle()"
 
-[sub_resource type="GDScript" id=4]
+[sub_resource type="GDScript" id=5]
 script/source = "tool
 extends Sprite
 func _ready():
@@ -72,15 +71,8 @@ func _physics_process(delta):
 	$spriteWeapon2.flip_h=get_parent().flip_h
 	$spriteWeapon2.position.x=13 if not $spriteWeapon2.flip_h else -13"
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 6.00006, 9 )
-
-[sub_resource type="StyleBoxFlat" id=7]
-bg_color = Color( 0.0941176, 0.0941176, 0.0941176, 1 )
-border_width_left = 1
-border_width_top = 2
-border_width_bottom = 1
-border_color = Color( 0.117647, 0.117647, 0.117647, 1 )
 
 [node name="debug" type="Control"]
 anchor_right = 1.0
@@ -95,19 +87,19 @@ texture = ExtResource( 1 )
 
 [node name="1" type="CollisionShape2D" parent="stage"]
 position = Vector2( 0, 160 )
-shape = SubResource( 5 )
+shape = SubResource( 1 )
 
 [node name="2" type="CollisionShape2D" parent="stage"]
 position = Vector2( 320, 160 )
-shape = SubResource( 5 )
+shape = SubResource( 1 )
 
 [node name="3" type="CollisionShape2D" parent="stage"]
 position = Vector2( 160, 30 )
-shape = SubResource( 6 )
+shape = SubResource( 2 )
 
 [node name="4" type="CollisionShape2D" parent="stage"]
 position = Vector2( 160, 280 )
-shape = SubResource( 6 )
+shape = SubResource( 2 )
 
 [node name="camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
@@ -126,6 +118,7 @@ script = ExtResource( 3 )
 autostart = true
 
 [node name="enemySpawner" type="Position2D" parent="Node2D"]
+editor/display_folded = true
 position = Vector2( 32, 33 )
 script = ExtResource( 4 )
 
@@ -133,10 +126,12 @@ script = ExtResource( 4 )
 autostart = true
 
 [node name="player" type="KinematicBody2D" parent="Node2D"]
+editor/display_folded = true
 position = Vector2( 176, 174 )
 script = ExtResource( 5 )
 
 [node name="hearts" type="Node2D" parent="Node2D/player"]
+editor/display_folded = true
 z_index = 10
 z_as_relative = false
 
@@ -159,10 +154,11 @@ hframes = 2
 autoplay = "idle"
 anims/dead = ExtResource( 7 )
 anims/idle = ExtResource( 8 )
-anims/walk = SubResource( 2 )
+anims/walk = SubResource( 3 )
 anims/walkWithWeapon = ExtResource( 9 )
 
 [node name="spriteWeapon" type="Sprite" parent="Node2D/player"]
+editor/display_folded = true
 visible = false
 self_modulate = Color( 1, 1, 1, 0 )
 position = Vector2( 0, 1 )
@@ -171,7 +167,7 @@ offset = Vector2( 12, -6 )
 vframes = 3
 hframes = 10
 frame = 10
-script = SubResource( 3 )
+script = SubResource( 4 )
 
 [node name="spriteWeapon2" type="Sprite" parent="Node2D/player/spriteWeapon"]
 position = Vector2( 18, 0 )
@@ -183,6 +179,7 @@ hframes = 10
 frame = 10
 
 [node name="sprite" type="Sprite" parent="Node2D/player"]
+editor/display_folded = true
 texture = ExtResource( 11 )
 hframes = 22
 frame = 2
@@ -194,7 +191,7 @@ offset = Vector2( 12, -6 )
 vframes = 3
 hframes = 10
 frame = 10
-script = SubResource( 4 )
+script = SubResource( 5 )
 
 [node name="spriteWeapon2" type="Sprite" parent="Node2D/player/sprite/spriteWeapon2"]
 position = Vector2( 13, -3 )
@@ -213,7 +210,7 @@ texture = ExtResource( 12 )
 
 [node name="collisionShape2D" type="CollisionShape2D" parent="Node2D/player"]
 position = Vector2( 6.10352e-05, 0.999969 )
-shape = SubResource( 1 )
+shape = SubResource( 6 )
 
 [node name="del2" type="Node2D" parent="Node2D/player"]
 
@@ -223,50 +220,43 @@ margin_top = 281.0
 margin_right = 320.0
 margin_bottom = 321.0
 
-[node name="panelContainer" type="PanelContainer" parent="control"]
+[node name="hBoxContainer" type="HBoxContainer" parent="control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_styles/panel = SubResource( 7 )
 
-[node name="hBoxContainer" type="HBoxContainer" parent="control/panelContainer"]
-margin_left = 1.0
-margin_top = 2.0
-margin_right = 319.0
-margin_bottom = 39.0
-
-[node name="l" type="Control" parent="control/panelContainer/hBoxContainer"]
+[node name="l" type="Control" parent="control/hBoxContainer"]
 margin_right = 103.0
-margin_bottom = 37.0
+margin_bottom = 40.0
 size_flags_horizontal = 3
 
-[node name="m" type="Control" parent="control/panelContainer/hBoxContainer"]
+[node name="m" type="Control" parent="control/hBoxContainer"]
 margin_left = 107.0
 margin_right = 210.0
-margin_bottom = 37.0
+margin_bottom = 40.0
 size_flags_horizontal = 3
 
-[node name="weaponIndicator" type="Node2D" parent="control/panelContainer/hBoxContainer/m"]
-position = Vector2( 51, 18 )
+[node name="weaponIndicator" type="Node2D" parent="control/hBoxContainer/m"]
+position = Vector2( 52, 18 )
 script = ExtResource( 13 )
 
-[node name="twnPosition" type="Tween" parent="control/panelContainer/hBoxContainer/m/weaponIndicator"]
+[node name="twnPosition" type="Tween" parent="control/hBoxContainer/m/weaponIndicator"]
 
-[node name="sprite" type="Sprite" parent="control/panelContainer/hBoxContainer/m/weaponIndicator"]
+[node name="sprite" type="Sprite" parent="control/hBoxContainer/m/weaponIndicator"]
 position = Vector2( 0, 51 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 10 )
 vframes = 3
 hframes = 10
 
-[node name="positionIn" type="Position2D" parent="control/panelContainer/hBoxContainer/m/weaponIndicator"]
+[node name="positionIn" type="Position2D" parent="control/hBoxContainer/m/weaponIndicator"]
 
-[node name="positionOut" type="Position2D" parent="control/panelContainer/hBoxContainer/m/weaponIndicator"]
+[node name="positionOut" type="Position2D" parent="control/hBoxContainer/m/weaponIndicator"]
 position = Vector2( 0, 51 )
 
-[node name="r" type="Control" parent="control/panelContainer/hBoxContainer"]
+[node name="r" type="Control" parent="control/hBoxContainer"]
 margin_left = 214.0
-margin_right = 318.0
-margin_bottom = 37.0
+margin_right = 319.0
+margin_bottom = 40.0
 size_flags_horizontal = 3
 [connection signal="tween_completed" from="camera2D/twnShake" to="camera2D" method="_on_twnShake_tween_completed"]
 [connection signal="timeout" from="Node2D/weaponSpawner/timer" to="Node2D/weaponSpawner" method="_on_timer_timeout"]

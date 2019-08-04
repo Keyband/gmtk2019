@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 var life=3
-var currentWeapon="Nothing"
+onready var currentWeapon="Nothing"
 
 var vectorVelocity=Vector2()
 var aimDistance=18
@@ -28,7 +28,7 @@ func _ready():
 	
 func _draw():
 	var angleDeg=rad2deg((get_global_mouse_position()-self.global_position).angle())+90
-	draw_circle_arc_poly(Vector2(),50,-45+angleDeg,45+angleDeg,Color("#80ffadad"))
+	draw_circle_arc_poly(Vector2(),50,-45+angleDeg,45+angleDeg,Color("#ffffff"))
 	
 func draw_circle_arc_poly(center, radius, angle_from, angle_to, color):
 	#Yeah, this is a shameless copypaste from here: http://docs.godotengine.org/en/latest/tutorials/2d/custom_drawing_in_2d.html
