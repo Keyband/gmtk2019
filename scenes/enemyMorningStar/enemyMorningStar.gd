@@ -83,11 +83,6 @@ func _on_twnEnter_tween_all_completed():
 	$twnChain.start()
 	$area2D.visible=true
 
-
-
-func _on_twnChain_tween_all_completed():
-	print("@@@@@@@@@@@@@@@@@@")
-	pass # Replace with function body.
-
-
-
+func _on_area2D_body_entered(body):
+	if body.is_in_group("Player"):
+		body.takeDamage(1)

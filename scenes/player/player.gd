@@ -11,7 +11,7 @@ var weaponWeight=1
 const minimumAimDistance=50
 var speed=175
 const maximumSpeed=175
-
+var invincible=false
 var anim="idle"
 var hitboxIndicatorProperties={"center":Vector2(),"radius":50,"angleRange":45,"color":Color("#55bd4882")}
 var lance=preload("res://scenes/attacks/lanceAttack.tscn")
@@ -53,6 +53,9 @@ func draw_circle_arc_poly(center, radius, angle_from, angle_to, color):
 	
 func _physics_process(delta):
 	update()
+	
+	if invincible:$sprite.visible=!$sprite.visible
+	else: $sprite.visible=true
 	
 	if life<=0:print("u ded")
 	
@@ -172,8 +175,13 @@ func changeWeapon(weapon):
 	
 func takeDamage(amount):
 	self.life-=amount
+	$tmrInvulnerability.start()
+	self.invincible=true
 	if life<=0:
 		print("Dead")
+		$"hearts/3".frame=1
+		$"hearts/2".frame=1
+		$"hearts/1".frame=1
 	elif life<=1:
 		$"hearts/3".frame=1
 		$"hearts/2".frame=1
@@ -181,3 +189,6 @@ func takeDamage(amount):
 		$"hearts/3".frame=1
 	elif life<=3: #???
 		pass
+
+func _on_tmrInvulnerability_timeout():
+	invincible=false

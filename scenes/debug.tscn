@@ -160,6 +160,10 @@ position = Vector2( 176, 174 )
 z_index = 5
 script = ExtResource( 5 )
 
+[node name="tmrInvulnerability" type="Timer" parent="Node2D/player"]
+wait_time = 3.0
+one_shot = true
+
 [node name="animationPlayer" type="AnimationPlayer" parent="Node2D/player"]
 autoplay = "idle"
 anims/dead = ExtResource( 6 )
@@ -343,3 +347,4 @@ script = SubResource( 9 )
 [connection signal="tween_completed" from="camera2D/twnShake" to="camera2D" method="_on_twnShake_tween_completed"]
 [connection signal="timeout" from="Node2D/weaponSpawner/timer" to="Node2D/weaponSpawner" method="_on_timer_timeout"]
 [connection signal="timeout" from="Node2D/enemySpawner/timer" to="Node2D/enemySpawner" method="_on_timer_timeout"]
+[connection signal="timeout" from="Node2D/player/tmrInvulnerability" to="Node2D/player" method="_on_tmrInvulnerability_timeout"]
