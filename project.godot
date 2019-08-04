@@ -15,7 +15,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="gmtk2019"
+config/name="Jank Warrior"
 run/main_scene="res://scenes/debug.tscn"
 config/icon="res://icon.png"
 
