@@ -3,6 +3,7 @@ extends Area2D
 var weight=2
 var used=false
 var animBroke=preload("res://scenes/weapon/animBroke.tscn")
+var minipause=preload("res://scenes/minipause/minipause.tscn")
 const damage=1
 var way
 var extraRotation=-PI/4
@@ -35,3 +36,7 @@ func _on_swordAttack_body_entered(body):
 		self.used=true
 		global.minorShake()
 		body.takeDamage(self.damage)
+		var i=minipause.instance()
+		get_parent().add_child(i)
+		$sfxBroke.pitch_scale=rand_range(1.8,2.2)
+		$sfxBroke.play()

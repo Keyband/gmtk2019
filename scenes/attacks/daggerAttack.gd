@@ -32,6 +32,8 @@ func _on_area2D_body_entered(body):
 		j.global_position=$sprite.global_position
 		get_parent().add_child(j)
 		self.queue_free()
+		$sfxBroke.pitch_scale=rand_range(1.8,2.2)
+		$sfxBroke.play()
 	elif body is StaticBody2D:
 		var i=animBroke.instance()
 		i.global_position=$sprite.global_position

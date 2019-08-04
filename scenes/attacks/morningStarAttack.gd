@@ -45,3 +45,5 @@ func _on_morningStarAttack_body_entered(body):
 		body.takeDamage(self.damage)
 		var i=minipause.instance()
 		get_parent().add_child(i)
+		$sfxBroke.pitch_scale=rand_range(1.8,2.2)
+		$sfxBroke.play()

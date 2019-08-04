@@ -37,3 +37,5 @@ func _on_axeAttack_body_entered(body):
 		body.takeDamage(self.damage)
 		var i=minipause.instance()
 		get_parent().add_child(i)
+		$sfxBroke.pitch_scale=rand_range(0.8,1.2)
+		$sfxBroke.play()
